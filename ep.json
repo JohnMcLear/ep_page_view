@@ -1,0 +1,13 @@
+{
+  "parts": [
+    {
+      "name": "page_view",
+      "client_hooks": {
+        "postAceInit": "ep_page_view/static/js/page_view:postAceInit"
+      },
+      "hooks": {
+        "eejsBlock_mySettings": "ep_page_view/page_view"
+      }
+    }
+  ]
+}

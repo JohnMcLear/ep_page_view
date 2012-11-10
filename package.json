@@ -1,0 +1,42 @@
+{
+  "name": "ep_page_view",
+  "description": "Add support to do 'page view', with a toggle on/off option in Settings",
+  "homepage": "https://github.com/johnyma22/ep_page_view",
+  "keywords": [
+    "page",
+    "view",
+    "zoom",
+    "preview",
+    "overview"
+  ],
+  "author": {
+    "name": "John McLear",
+    "email": "john@mclear.co.uk",
+    "url": "http://mclear.co.uk"
+  },
+  "version": "0.0.3",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/johnyma22/ep_page_view.git"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "optionalDependencies": {},
+  "engines": {
+    "node": "*"
+  },
+  "_id": "ep_page_view@0.0.3",
+  "_engineSupported": true,
+  "_npmVersion": "1.1.24",
+  "_nodeVersion": "v0.8.8",
+  "_defaultsLoaded": true,
+  "dist": {
+    "shasum": "b1c99e29f18a449ee044194aacd5af50c7aeb8a8"
+  },
+  "_from": "ep_page_view",
+  "readme": "ERROR: No README.md file found!",
+  "_npmUser": {
+    "name": "johnyma22",
+    "email": "john@mclear.co.uk"
+  }
+}
