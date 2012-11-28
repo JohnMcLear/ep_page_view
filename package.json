@@ -26,6 +26,6 @@
   "dependencies": {},
 
   "engines": {
-    "node": "*",
+    "node": "*"
   }
 }
