@@ -6,7 +6,8 @@
         "postAceInit": "ep_page_view/static/js/page_view:postAceInit"
       },
       "hooks": {
-        "eejsBlock_mySettings": "ep_page_view/page_view"
+        "eejsBlock_mySettings": "ep_page_view/page_view",
+        "eejsBlock_styles": "ep_page_view/page_view"
       }
     }
   ]

@@ -1,0 +1,13 @@
+#editorcontainer.page_view {
+  overflow: hidden;
+  background-color: #f7f7f7;
+  text-align: center;
+}
+
+iframe.page_view {
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  position: relative;
+  max-width: 850px;
+  top: 27px;
+}
