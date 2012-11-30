@@ -1,3 +1,5 @@
+@media (min-width: 860px) {
+  
 #editorcontainer.page_view {
   overflow: hidden;
   background-color: #f7f7f7;
@@ -11,4 +13,6 @@ iframe.page_view {
   border-width: 1px 1px 0 1px;
   position: relative;
   max-width: 850px;
+}
+
 }
