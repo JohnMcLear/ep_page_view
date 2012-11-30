@@ -1,9 +1,8 @@
 {
   "name":        "ep_page_view",
   "version":     "0.1.0",
-  "keywords":    "page view preview overview",
+  "keywords":    ["page view", "pv", "preview", "overview"],
   "description": "Add support to do 'page view', with a toggle on/off option in Settings",
-
 
   "contributors": [
     {
