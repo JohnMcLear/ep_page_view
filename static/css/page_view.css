@@ -2,12 +2,13 @@
   overflow: hidden;
   background-color: #f7f7f7;
   text-align: center;
+  padding-top: 27px;
 }
 
 iframe.page_view {
-  border-radius: 5px;
+  border-radius: 5px 5px 0 0;
   border: 1px solid #ccc;
+  border-width: 1px 1px 0 1px;
   position: relative;
   max-width: 850px;
-  top: 27px;
 }
