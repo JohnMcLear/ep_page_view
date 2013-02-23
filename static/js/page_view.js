@@ -1,39 +1,32 @@
-var isMobile = require('ep_etherpad-lite/static/js/ace2_common').browser.mobile;
+var isMobile = $.browser.mobile;
 
 if (!isMobile) {
   var postAceInit = function(hook, context){
-
-    /* Check on Init */
-    if($('#options-pageview').attr('checked')) {
-      enablePageView();
-    } else {
-      disablePageView();
+    var pv = {
+      enable: function() {
+        $('#editorcontainer, iframe').addClass('page_view');
+      },
+      disable: function() {
+        $('#editorcontainer, iframe').removeClass('page_view');
+      }
     }
-   
-    /* Check on Click */
-    $('#options-pageview').on('click', function(){
-      if($('#options-pageview').attr('checked')) {
-        enablePageView();
+    /* init */
+    if($('#options-pageview').is(':checked')) {
+      pv.enable();
+    } else {
+      pv.disable();
+    }
+    /* on click */
+    $('#options-pageview').on('click', function() {
+      if($('#options-pageview').is(':checked')) {
+        pv.enable();
       } else {
-        disablePageView();
+        pv.disable();
       }
     });
-
-    function enablePageView(){
-      $('#editorcontainer').addClass('page_view');
-      $('iframe').addClass('page_view');
-
-    }
-
-    function disablePageView(){
-      $('#editorcontainer').removeClass('page_view');
-      $('iframe').removeClass('page_view');
-    }
   };
-
   exports.postAceInit = postAceInit;
 } else {
   $('input#options-pageview').hide();
   $('label[for=options-pageview]').hide();
 }
-
