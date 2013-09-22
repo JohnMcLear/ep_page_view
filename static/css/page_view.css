@@ -1,3 +1,9 @@
+.pagebreak{
+  margin-top:50px;
+  border-top:dotted grey 1px;
+  padding-top:50px;
+}
+
 @media (min-width: 860px) {
   
 #editorcontainer.page_view {
