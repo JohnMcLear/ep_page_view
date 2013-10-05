@@ -1,0 +1,5 @@
+deploy:
+  provider: npm
+  email: "john@mclear.co.uk"
+  api_key: "ZJHqpMfOUWY0kny9CY7gxjeUUsBkCJxzrKMB/iGyDz4wFmnW8b+K6ssLhMpvi1RTp6xN1wkYfPdsZFwWQrp783v14mrKLaIeRUqDwwVrtuhSDRGrA/iQmUxACq7kVg3dYIkST8iuMKOPM7jQxNSGutJEP1xNrdhRSmowH4M749M="
+
