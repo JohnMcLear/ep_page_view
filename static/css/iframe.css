@@ -1,5 +1,6 @@
 .pageBreak{
-  page-break-before: always;
+  page-break-after: always;
+  -webkit-region-break-inside: avoid;
   border-bottom: 1px dotted #AAA;
   width:100%;
   height:1px;

@@ -88,8 +88,9 @@ exports.aceDomLineProcessLineAttributes = function(name, context){
   if( context.cls.indexOf("pageBreak") !== -1) { var type="pageBreak"; }
   var tagIndex = context.cls.indexOf(type);
   if (tagIndex !== undefined && type){
+    // NOTE THE INLINE CSS IS REQUIRED FOR IT TO WORK WITH PRINTING!   Or is it?
     var modifier = {
-      preHtml: '<div class="pageBreak">',
+      preHtml: '<div class="pageBreak" style="page-break-after:always;page-break-inside:avoid;-webkit-region-break-inside: avoid;">',
       postHtml: '</div>',
       processedMarker: true
     };
