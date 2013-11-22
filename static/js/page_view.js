@@ -46,7 +46,6 @@ if (!isMobile) {
         ace.ace_doInsertPageBreak();
       },'insertPageBreak' , true);
     });
-
   };
 } else {
   $('input#options-pageview').hide();
@@ -84,7 +83,6 @@ exports.aceAttribsToClasses = function(hook, context){
 *
 ***/
 exports.aceDomLineProcessLineAttributes = function(name, context){
-  
   if( context.cls.indexOf("pageBreak") !== -1) { var type="pageBreak"; }
   var tagIndex = context.cls.indexOf(type);
   if (tagIndex !== undefined && type){
@@ -160,3 +158,57 @@ exports.aceKeyEvent = function(hook, callstack, editorInfo, rep, documentAttribu
   }
 }
 
+exports.aceEditEvent = function(hook, callstack, editorInfo, rep, documentAttributeManager){
+  if(!callstack.callstack.docTextChanged) return;
+
+  var lines = {};
+  var yHeight = 1122.5; // This is dirty and I feel bad for it..
+  var lineNumber = 0;
+
+  var HTMLLines = $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").children("div");
+
+  $(HTMLLines).each(function(){ // For each line
+    var y = $(this).context.offsetTop;
+    var id = $(this)[0].id; // get the id of the link
+    var height = $(this).height();
+
+    // How many PX since last break?
+    var lastLine = lineNumber-1;
+    if(!lines[lastLine]){
+      var previousY = 0;
+      var pxSinceLastBreak = 0;
+    }else{
+      var previousY = lines[lastLine].pxSinceLastBreak;
+      var pxSinceLastBreak = previousY + height;
+    }
+
+    // Does it already have any children with teh class pageBreak?
+    var manualBreak = $(this).children().hasClass("pageBreak");
+
+    // If it's a manualBreak then reset pxSinceLastBreak to 0;
+    if(manualBreak) pxSinceLastBreak = 0;
+
+    // Should this be a line break?
+    var computedBreak = ((pxSinceLastBreak + height) >= yHeight);
+    if(computedBreak){
+      // console.log(id, "should be a page break");
+      $(this).addClass("pageBreakComputed");
+      pxSinceLastBreak = 0;
+    }else{
+      $(this).removeClass("pageBreakComputed");
+    }
+    
+    lines[lineNumber] = {
+      pxSinceLastBreak : pxSinceLastBreak,
+      manualBreak : manualBreak,
+      computedBreak : computedBreak,
+      id : id,
+      y : y,
+      height : height
+
+    }
+    lineNumber++;
+  });
+
+  // console.log(lines);
+}
