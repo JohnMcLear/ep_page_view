@@ -18,7 +18,9 @@
         "eejsBlock_styles": "ep_page_view/page_view",
         "collectContentPre": "ep_page_view/static/js/shared",
         "collectContentPost": "ep_page_view/static/js/shared",
-        "getLineHTMLForExport": "ep_page_view/index"
+        "getLineHTMLForExport": "ep_page_view/index",
+        "eejsBlock_dd_insert" : "ep_page_view/page_view",
+        "eejsBlock_dd_view" : "ep_page_view/page_view"
       }
     }
   ]

@@ -38,8 +38,6 @@ if (!isMobile) {
       pv.disable();
     }
 
-    $('.menu_left').append("<span id='insertPageBreak'>Page Break</span>");
-
     // Bind the event handler to the toolbar buttons
     $('#insertPageBreak').on('click', function(){
       context.ace.callWithAce(function(ace){
