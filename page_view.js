@@ -13,11 +13,10 @@ exports.eejsBlock_styles = function (hook_name, args, cb){
 } 
 
 exports.eejsBlock_dd_insert = function (hook_name, args, cb){
-console.warn("HELLO WORLD!");
   args.content = args.content + eejs.require('ep_page_view/templates/page_view_menu.ejs', {checked : checked_state});
 }
 
 exports.eejsBlock_dd_view = function (hook_name, args, cb){
-  args.content = args.content + "<li>" +eejs.require('ep_page_view/templates/page_view_entry.ejs', {checked : checked_state}) + "</li>";
+  args.content = args.content + "<li><a href='#' onClick='$(\"#options-pageview\").click();'>Page View</a></li>";
 }
 
