@@ -1,0 +1,37 @@
+.pageBreak{
+  page-break-after: always;
+  -webkit-region-break-inside: avoid;
+  border-bottom: 1px dotted #AAA;
+  width:100%;
+  height:1px;
+}
+
+.pageBreakComputed{
+  page-break-after: always;
+  -webkit-region-break-inside: avoid;
+  border-bottom: 1px dotted #AAA;
+}
+
+
+#outerdocbody > iframe{
+  left:0px !important;
+  width:850px !important;
+  margin:auto;
+}
+
+#outerdocbody{
+  background-color:#f7f7f7;
+  margin:none;
+  border:none;
+}
+
+#innerdocbody{
+  padding:100px 100px 100px 100px;
+  background-color:#fff;
+  border-radius: 5px 5px 0 0;
+  border: 1px solid #ccc;
+  border-width: 1px 1px 0 1px;
+  position: relative;
+  box-shadow: 10px 20px 40px 20px #ddd;
+}
+

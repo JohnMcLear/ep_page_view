@@ -1,6 +1,6 @@
 {
   "name":        "ep_page_view",
-  "version":     "0.2.2",
+  "version":     "0.3.1",
   "keywords":    ["page view", "pv", "preview", "overview"],
   "description": "Add support to do 'page view', with a toggle on/off option in Settings",
 
