@@ -9,9 +9,18 @@ if (!isMobile) {
     var pv = {
       enable: function() {
         $('#editorcontainer, iframe').addClass('page_view');
+        $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").addClass('innerPV');
+        $('iframe[name="ace_outer"]').contents().find("iframe").addClass('outerPV');
+        $('iframe[name="ace_outer"]').contents().find('#outerdocbody').addClass("outerBackground");
+        $('#ep_page_ruler').show();
       },
       disable: function() {
         $('#editorcontainer, iframe').removeClass('page_view');
+        $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").removeClass('innerPV');
+        $('iframe[name="ace_outer"]').contents().find("iframe").removeClass('outerPV');
+//        $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").contents().find("div").css("margin-left","40px");
+        $('iframe[name="ace_outer"]').contents().find('#outerdocbody').removeClass("outerBackground");
+        $('#ep_page_ruler').hide();
       }
     }
     /* init */

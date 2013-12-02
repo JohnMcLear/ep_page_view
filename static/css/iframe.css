@@ -4,12 +4,17 @@
   border-bottom: 1px dotted #AAA;
   width:100%;
   height:1px;
+  margin-left:-50px;
 }
 
 .pageBreakComputed{
   page-break-after: always;
   -webkit-region-break-inside: avoid;
   border-bottom: 1px dotted #AAA;
+  margin:0px !important;
+  height:50px;
+  border-top:1px dotted #aaa;
+  background-color:#f7f7f7;
 }
 
 .outerPV{
@@ -30,6 +35,7 @@
   border-width: 1px 1px 0 1px;
   position: relative;
   box-shadow: 10px 20px 40px 20px #ddd;
+  padding-right:0px !important;
 }
 
 .innerPVDiv{
