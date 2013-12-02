@@ -11,14 +11,23 @@ if (!isMobile) {
         $('#editorcontainer, iframe').addClass('page_view');
         $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").addClass('innerPV');
         $('iframe[name="ace_outer"]').contents().find("iframe").addClass('outerPV');
+//        $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").contents().each(function(){
+//          $(this).addClass("innerPVDiv");
+//        });
         $('iframe[name="ace_outer"]').contents().find('#outerdocbody').addClass("outerBackground");
+        $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").contents().find('.pageBreak').click(function(e){
+          top.console.log("Can't edit pagebreak Line");
+          e.preventDefault();
+          return false;
+        });
+
         $('#ep_page_ruler').show();
       },
       disable: function() {
         $('#editorcontainer, iframe').removeClass('page_view');
         $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").removeClass('innerPV');
         $('iframe[name="ace_outer"]').contents().find("iframe").removeClass('outerPV');
-//        $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").contents().find("div").css("margin-left","40px");
+//        $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").contents().find("div").removeClass("innerPVDiv");
         $('iframe[name="ace_outer"]').contents().find('#outerdocbody').removeClass("outerBackground");
         $('#ep_page_ruler').hide();
       }
@@ -166,7 +175,7 @@ exports.aceEditEvent = function(hook, callstack, editorInfo, rep, documentAttrib
   if(!callstack.callstack.docTextChanged) return;
 
   var lines = {};
-  var yHeight = 1122.5; // This is dirty and I feel bad for it..
+  var yHeight = 922.5; // This is dirty and I feel bad for it..
   var lineNumber = 0;
 
   var HTMLLines = $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").children("div");
