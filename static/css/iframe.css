@@ -12,21 +12,18 @@
   border-bottom: 1px dotted #AAA;
 }
 
-
-#outerdocbody > iframe{
+.outerPV{
   left:0px !important;
   width:850px !important;
   margin:auto;
 }
 
-#outerdocbody{
-  background-color:#f7f7f7;
+.outerBackground{
+  background-color:#f7f7f7 !important;
   margin:none;
   border:none;
 }
-
-#innerdocbody{
-  padding:100px 100px 100px 100px;
+.innerPV{
   background-color:#fff;
   border-radius: 5px 5px 0 0;
   border: 1px solid #ccc;
@@ -35,3 +32,10 @@
   box-shadow: 10px 20px 40px 20px #ddd;
 }
 
+.innerPVDiv{
+  margin-left:100px;
+}
+
+#innerdocbody > div{
+  margin-left:100px;
+}
