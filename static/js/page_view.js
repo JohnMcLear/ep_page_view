@@ -11,11 +11,9 @@ if (!isMobile) {
         $('#editorcontainer, iframe').addClass('page_view');
         $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").addClass('innerPV');
         $('iframe[name="ace_outer"]').contents().find("iframe").addClass('outerPV');
-//        $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").contents().each(function(){
-//          $(this).addClass("innerPVDiv");
-//        });
         $('iframe[name="ace_outer"]').contents().find('#outerdocbody').addClass("outerBackground");
         $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").contents().find('.pageBreak').click(function(e){
+          $(this).focusout().blur();
           top.console.log("Can't edit pagebreak Line");
           e.preventDefault();
           return false;
@@ -104,7 +102,7 @@ exports.aceDomLineProcessLineAttributes = function(name, context){
   if (tagIndex !== undefined && type){
     // NOTE THE INLINE CSS IS REQUIRED FOR IT TO WORK WITH PRINTING!   Or is it?
     var modifier = {
-     preHtml: '<div class="pageBreak" style="page-break-after:always;page-break-inside:avoid;-webkit-region-break-inside: avoid;">',
+     preHtml: '<div class="pageBreak" contentEditable=false style="page-break-after:always;page-break-inside:avoid;-webkit-region-break-inside: avoid;">',
       postHtml: '</div>',
       processedMarker: true
     };
@@ -123,7 +121,7 @@ exports.aceCreateDomLine = function(name, context){
   var tagIndex;
   if (pageBreak){
     var modifier = {
-      extraOpenTags: '<div class=pageBreak>',
+      extraOpenTags: '<div class=pageBreak contentEditable=false>',
       extraCloseTags: '</div>',
       cls: cls
     };
@@ -162,6 +160,7 @@ exports.aceInitialized = function(hook, context){
 exports.aceKeyEvent = function(hook, callstack, editorInfo, rep, documentAttributeManager, evt){
   var evt = callstack.evt;
   var k = evt.keyCode;
+  // console.log(evt, k, callstack, editorInfo, rep);
   if(evt.ctrlKey && k == 13 && evt.type == "keyup" ){
     callstack.editorInfo.ace_doInsertPageBreak();
     evt.preventDefault();
@@ -172,6 +171,7 @@ exports.aceKeyEvent = function(hook, callstack, editorInfo, rep, documentAttribu
 }
 
 exports.aceEditEvent = function(hook, callstack, editorInfo, rep, documentAttributeManager){
+  // Handle redrawing the page
   if(!callstack.callstack.docTextChanged) return;
 
   var lines = {};
@@ -179,6 +179,8 @@ exports.aceEditEvent = function(hook, callstack, editorInfo, rep, documentAttrib
   var lineNumber = 0;
 
   var HTMLLines = $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").children("div");
+
+  $('.pageBreakComputed').remove();
 
   $(HTMLLines).each(function(){ // For each line
     var y = $(this).context.offsetTop;
@@ -205,10 +207,14 @@ exports.aceEditEvent = function(hook, callstack, editorInfo, rep, documentAttrib
     var computedBreak = ((pxSinceLastBreak + height) >= yHeight);
     if(computedBreak){
       // console.log(id, "should be a page break");
-      $(this).addClass("pageBreakComputed");
+      var isAlreadyPageBreak = $(this).find(".pageBreakComputed").length != 0;
+
+      console.log( "iPB", isAlreadyPageBreak );
+      if(!isAlreadyPageBreak)  $(this).append("<div class='pageBreakComputed' contentEditable=false><li contenteditable=false><span contenteditable=false></li></span></div>");
+//      $(this).addClass("pageBreakComputed");
       pxSinceLastBreak = 0;
     }else{
-      $(this).removeClass("pageBreakComputed");
+//      $(this).removeClass("pageBreakComputed");
     }
 
     lines[lineNumber] = {

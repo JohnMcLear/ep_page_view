@@ -9,19 +9,21 @@
   background-color:#f7f7f7;
   margin-top:100px;
   margin-bottom:100px;
+  cursor: default;
 }
 
 .pageBreakComputed{
   page-break-after: always;
   -webkit-region-break-inside: avoid;
   border-bottom: 1px dotted #AAA;
-  margin-left:-2px !important;
+  margin-left:-102px !important;
   width:850px;
   height:40px;
   border-top: 1px dotted #aaa;
   background-color:#f7f7f7;
   margin-top:100px;
   margin-bottom:100px;
+  cursor: default;
 }
 
 .outerPV{
