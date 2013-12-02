@@ -26,6 +26,8 @@ if (!isMobile) {
         $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").removeClass('innerPV');
         $('iframe[name="ace_outer"]').contents().find("iframe").removeClass('outerPV');
 //        $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").contents().find("div").removeClass("innerPVDiv");
+//        $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").contents().find(".pageBreak").css({width:"100%"});
+//        $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").contents().find(".pageBreakComputed").hide('pageBreakFullScreen');
         $('iframe[name="ace_outer"]').contents().find('#outerdocbody').removeClass("outerBackground");
         $('#ep_page_ruler').hide();
       }
@@ -102,7 +104,7 @@ exports.aceDomLineProcessLineAttributes = function(name, context){
   if (tagIndex !== undefined && type){
     // NOTE THE INLINE CSS IS REQUIRED FOR IT TO WORK WITH PRINTING!   Or is it?
     var modifier = {
-     preHtml: '<div class="pageBreak" contentEditable=false style="page-break-after:always;page-break-inside:avoid;-webkit-region-break-inside: avoid;">',
+      preHtml: '<div class="pageBreak" contentEditable=false style="page-break-after:always;page-break-inside:avoid;-webkit-region-break-inside: avoid;">',
       postHtml: '</div>',
       processedMarker: true
     };
@@ -171,6 +173,13 @@ exports.aceKeyEvent = function(hook, callstack, editorInfo, rep, documentAttribu
 }
 
 exports.aceEditEvent = function(hook, callstack, editorInfo, rep, documentAttributeManager){
+
+  // If we're not in page view mode just hide all the things
+  if($('#options-pageview').is(':checked')) {}else{
+    $('.pageBreakComputed').remove();
+    return false;
+  }
+
   // Handle redrawing the page
   if(!callstack.callstack.docTextChanged) return;
 
@@ -207,14 +216,15 @@ exports.aceEditEvent = function(hook, callstack, editorInfo, rep, documentAttrib
     var computedBreak = ((pxSinceLastBreak + height) >= yHeight);
     if(computedBreak){
       // console.log(id, "should be a page break");
+
+      // is it already a page break?
       var isAlreadyPageBreak = $(this).find(".pageBreakComputed").length != 0;
 
-      console.log( "iPB", isAlreadyPageBreak );
-      if(!isAlreadyPageBreak)  $(this).append("<div class='pageBreakComputed' contentEditable=false><li contenteditable=false><span contenteditable=false></li></span></div>");
-//      $(this).addClass("pageBreakComputed");
+      // console.log( "iPB", isAlreadyPageBreak );
+
+      // If it's not already a page break append a page break
+      if(!isAlreadyPageBreak)  $(this).append("<div class='pageBreakComputed' contentEditable=false></div>");
       pxSinceLastBreak = 0;
-    }else{
-//      $(this).removeClass("pageBreakComputed");
     }
 
     lines[lineNumber] = {
