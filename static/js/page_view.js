@@ -23,7 +23,7 @@ if (!isMobile) {
           $('#options-linenoscheck').click();
           $('#options-linenoscheck').attr("disabled", true);
         }
-        $('#editorcontainer').css("top", "37px");
+        $('#editorcontainer').css("top", "17px");
         $('#ep_page_ruler').show();
       },
       disable: function() {
