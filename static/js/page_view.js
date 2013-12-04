@@ -20,23 +20,23 @@ if (!isMobile) {
           return false;
         });
         if($('#options-linenoscheck').is(':checked')){
-          $('#options-linenoscheck').attr("disabled", true);
           $('#options-linenoscheck').click();
+          $('#options-linenoscheck').attr("disabled", true);
         }
-
+        $('#editorcontainer').css("top", "37px");
         $('#ep_page_ruler').show();
       },
       disable: function() {
         $('#editorcontainer, iframe').removeClass('page_view');
         $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").removeClass('innerPV');
         $('iframe[name="ace_outer"]').contents().find("iframe").removeClass('outerPV');
-//        $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").contents().find("div").removeClass("innerPVDiv");
         $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").css("margin-left","-100px");
-//        $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").contents().find(".pageBreak").css({width:"100%"});
-//        $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").contents().find(".pageBreakComputed").hide('pageBreakFullScreen');
         $('iframe[name="ace_outer"]').contents().find('#outerdocbody').removeClass("outerBackground");
         $('#ep_page_ruler').hide();
         $('#options-linenoscheck').attr("disabled", false);
+        var containerTop = $('.toolbar').position().top + $('.toolbar').height() +5;
+        $('#editorcontainerbox').css("top", containerTop+"px");
+        $('#editorcontainer').css("top", 0);
       }
     }
     /* init */

@@ -4,6 +4,15 @@
   overflow: hidden;
   background-color: #f7f7f7;
   text-align: center;
+  top:37px;
+}
+
+#editorcontainerbox{
+  background-color:#f7f7f7;
+}
+
+#editorloadingbox{
+  margin-top:100px;
 }
 
 iframe.page_view {
