@@ -12,6 +12,7 @@
   cursor: default;
 }
 
+
 .pageBreakComputed{
   page-break-after: always;
   -webkit-region-break-inside: avoid;

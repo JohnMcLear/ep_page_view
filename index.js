@@ -29,5 +29,3 @@ function _analyzeLine(alineAttrs, apool) {
   }
   return header;
 }
-
-

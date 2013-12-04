@@ -5,7 +5,7 @@ var _ = require('ep_etherpad-lite/static/js/underscore');
 var isMobile = $.browser.mobile;
 
 if (!isMobile) {
-  var postAceInit = function(hook, context){
+  exports.postAceInit = function(hook, context){
     var pv = {
       enable: function() {
         $('#editorcontainer, iframe').addClass('page_view');
@@ -69,7 +69,6 @@ if (!isMobile) {
       },'insertPageBreak' , true);
     });
   };
-  exports.postAceInit = postAceInit;
 } else {
   $('input#options-pageview').hide();
   $('label[for=options-pageview]').hide();
@@ -119,7 +118,6 @@ exports.aceDomLineProcessLineAttributes = function(name, context){
   }
 
   return []; // or return nothing
-
 };
 
 // Here we convert the class pageBreak into a tag
@@ -169,7 +167,6 @@ exports.aceInitialized = function(hook, context){
 exports.aceKeyEvent = function(hook, callstack, editorInfo, rep, documentAttributeManager, evt){
   var evt = callstack.evt;
   var k = evt.keyCode;
-  // console.log(evt, k, callstack, editorInfo, rep);
   if(evt.ctrlKey && k == 13 && evt.type == "keyup" ){
     callstack.editorInfo.ace_doInsertPageBreak();
     evt.preventDefault();
@@ -180,7 +177,6 @@ exports.aceKeyEvent = function(hook, callstack, editorInfo, rep, documentAttribu
 }
 
 exports.aceEditEvent = function(hook, callstack, editorInfo, rep, documentAttributeManager){
-
   // If we're not in page view mode just hide all the things
   if($('#options-pageview').is(':checked')) {}else{
     $('.pageBreakComputed').remove();
@@ -195,10 +191,9 @@ exports.aceEditEvent = function(hook, callstack, editorInfo, rep, documentAttrib
   var lineNumber = 0;
 
   var HTMLLines = $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").children("div");
-
   $('.pageBreakComputed').remove();
 
-  $(HTMLLines).each(function(){ // For each line
+ $(HTMLLines).each(function(){ // For each line
     var y = $(this).context.offsetTop;
     var id = $(this)[0].id; // get the id of the link
     var height = $(this).height();
@@ -245,7 +240,4 @@ exports.aceEditEvent = function(hook, callstack, editorInfo, rep, documentAttrib
     }
     lineNumber++;
   });
-
-  // console.log(lines);
 }
-

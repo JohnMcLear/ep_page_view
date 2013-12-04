@@ -1,4 +1,4 @@
-@media (min-width: 860px) {
+@media (min-width: 1060px) {
   
 #editorcontainer.page_view {
   overflow: hidden;
@@ -13,16 +13,4 @@
 
 #editorloadingbox{
   margin-top:100px;
-}
-
-iframe.page_view {
-/*
-  border-radius: 5px 5px 0 0;
-  border: 1px solid #ccc;
-  border-width: 1px 1px 0 1px;
-  position: relative;
-*/
-/*  max-width: 850px;*/
-}
-
 }

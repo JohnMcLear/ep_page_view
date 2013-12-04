@@ -8,8 +8,7 @@ exports.eejsBlock_mySettings = function (hook_name, args, cb) {
   return cb();
 }
 
-exports.eejsBlock_styles = function (hook_name, args, cb)
-{
+exports.eejsBlock_styles = function (hook_name, args, cb){
   args.content = args.content + '<link href="../static/plugins/ep_page_view/static/css/page_view.css" rel="stylesheet">';
 } 
 
@@ -21,4 +20,7 @@ exports.eejsBlock_dd_view = function (hook_name, args, cb){
   args.content = args.content + "<li><a href='#' onClick='$(\"#options-pageview\").click();'>Page View</a></li>";
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0ffb40c43fd6bf79ef200b2fff13b5db3970d359
