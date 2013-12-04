@@ -12,12 +12,17 @@ if (!isMobile) {
         $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").addClass('innerPV');
         $('iframe[name="ace_outer"]').contents().find("iframe").addClass('outerPV');
         $('iframe[name="ace_outer"]').contents().find('#outerdocbody').addClass("outerBackground");
+        $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").css("margin-left","0px");
         $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").contents().find('.pageBreak').click(function(e){
           $(this).focusout().blur();
           top.console.log("Can't edit pagebreak Line");
           e.preventDefault();
           return false;
         });
+        if($('#options-linenoscheck').is(':checked')){
+          $('#options-linenoscheck').attr("disabled", true);
+          $('#options-linenoscheck').click();
+        }
 
         $('#ep_page_ruler').show();
       },
@@ -26,10 +31,12 @@ if (!isMobile) {
         $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").removeClass('innerPV');
         $('iframe[name="ace_outer"]').contents().find("iframe").removeClass('outerPV');
 //        $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").contents().find("div").removeClass("innerPVDiv");
+        $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").css("margin-left","-100px");
 //        $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").contents().find(".pageBreak").css({width:"100%"});
 //        $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").contents().find(".pageBreakComputed").hide('pageBreakFullScreen');
         $('iframe[name="ace_outer"]').contents().find('#outerdocbody').removeClass("outerBackground");
         $('#ep_page_ruler').hide();
+        $('#options-linenoscheck').attr("disabled", false);
       }
     }
     /* init */
