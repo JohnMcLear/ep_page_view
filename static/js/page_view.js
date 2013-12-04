@@ -9,9 +9,34 @@ if (!isMobile) {
     var pv = {
       enable: function() {
         $('#editorcontainer, iframe').addClass('page_view');
+        $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").addClass('innerPV');
+        $('iframe[name="ace_outer"]').contents().find("iframe").addClass('outerPV');
+        $('iframe[name="ace_outer"]').contents().find('#outerdocbody').addClass("outerBackground");
+        $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").css("margin-left","0px");
+        $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").contents().find('.pageBreak').click(function(e){
+          $(this).focusout().blur();
+          top.console.log("Can't edit pagebreak Line");
+          e.preventDefault();
+          return false;
+        });
+        if($('#options-linenoscheck').is(':checked')){
+          $('#options-linenoscheck').click();
+          $('#options-linenoscheck').attr("disabled", true);
+        }
+        $('#editorcontainer').css("top", "37px");
+        $('#ep_page_ruler').show();
       },
       disable: function() {
         $('#editorcontainer, iframe').removeClass('page_view');
+        $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").removeClass('innerPV');
+        $('iframe[name="ace_outer"]').contents().find("iframe").removeClass('outerPV');
+        $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").css("margin-left","-100px");
+        $('iframe[name="ace_outer"]').contents().find('#outerdocbody').removeClass("outerBackground");
+        $('#ep_page_ruler').hide();
+        $('#options-linenoscheck').attr("disabled", false);
+        var containerTop = $('.toolbar').position().top + $('.toolbar').height() +5;
+        $('#editorcontainerbox').css("top", containerTop+"px");
+        $('#editorcontainer').css("top", 0);
       }
     }
     /* init */
@@ -37,7 +62,6 @@ if (!isMobile) {
       $('#options-pageview').attr('checked',false);
       pv.disable();
     }
-
     // Bind the event handler to the toolbar buttons
     $('#insertPageBreak').on('click', function(){
       context.ace.callWithAce(function(ace){
@@ -86,7 +110,7 @@ exports.aceDomLineProcessLineAttributes = function(name, context){
   if (tagIndex !== undefined && type){
     // NOTE THE INLINE CSS IS REQUIRED FOR IT TO WORK WITH PRINTING!   Or is it?
     var modifier = {
-      preHtml: '<div class="pageBreak" style="page-break-after:always;page-break-inside:avoid;-webkit-region-break-inside: avoid;">',
+      preHtml: '<div class="pageBreak" contentEditable=false style="page-break-after:always;page-break-inside:avoid;-webkit-region-break-inside: avoid;">',
       postHtml: '</div>',
       processedMarker: true
     };
@@ -94,9 +118,7 @@ exports.aceDomLineProcessLineAttributes = function(name, context){
   }
 
   return []; // or return nothing
-  
 };
-
 
 // Here we convert the class pageBreak into a tag
 exports.aceCreateDomLine = function(name, context){
@@ -106,7 +128,7 @@ exports.aceCreateDomLine = function(name, context){
   var tagIndex;
   if (pageBreak){
     var modifier = {
-      extraOpenTags: '<div class=pageBreak>',
+      extraOpenTags: '<div class=pageBreak contentEditable=false>',
       extraCloseTags: '</div>',
       cls: cls
     };
@@ -117,7 +139,6 @@ exports.aceCreateDomLine = function(name, context){
 
 function doInsertPageBreak(){
   this.editorInfo.ace_doReturnKey();
-
   var rep = this.rep;
   var documentAttributeManager = this.documentAttributeManager;
   if (!(rep.selStart && rep.selEnd)){ return; } // only continue if we have some caret position
@@ -133,7 +154,6 @@ function doInsertPageBreak(){
   });
   this.editorInfo.ace_focus();
   this.editorInfo.ace_doReturnKey();
- 
 }
 
 // Once ace is initialized, we set ace_doInsertPageBreak and bind it to the context
@@ -157,15 +177,23 @@ exports.aceKeyEvent = function(hook, callstack, editorInfo, rep, documentAttribu
 }
 
 exports.aceEditEvent = function(hook, callstack, editorInfo, rep, documentAttributeManager){
+  // If we're not in page view mode just hide all the things
+  if($('#options-pageview').is(':checked')) {}else{
+    $('.pageBreakComputed').remove();
+    return false;
+  }
+
+  // Handle redrawing the page
   if(!callstack.callstack.docTextChanged) return;
 
   var lines = {};
-  var yHeight = 1122.5; // This is dirty and I feel bad for it..
+  var yHeight = 922.5; // This is dirty and I feel bad for it..
   var lineNumber = 0;
 
   var HTMLLines = $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").children("div");
+  $('.pageBreakComputed').remove();
 
-  $(HTMLLines).each(function(){ // For each line
+ $(HTMLLines).each(function(){ // For each line
     var y = $(this).context.offsetTop;
     var id = $(this)[0].id; // get the id of the link
     var height = $(this).height();
@@ -190,12 +218,17 @@ exports.aceEditEvent = function(hook, callstack, editorInfo, rep, documentAttrib
     var computedBreak = ((pxSinceLastBreak + height) >= yHeight);
     if(computedBreak){
       // console.log(id, "should be a page break");
-      $(this).addClass("pageBreakComputed");
+
+      // is it already a page break?
+      var isAlreadyPageBreak = $(this).find(".pageBreakComputed").length != 0;
+
+      // console.log( "iPB", isAlreadyPageBreak );
+
+      // If it's not already a page break append a page break
+      if(!isAlreadyPageBreak)  $(this).append("<div class='pageBreakComputed' contentEditable=false></div>");
       pxSinceLastBreak = 0;
-    }else{
-      $(this).removeClass("pageBreakComputed");
     }
-    
+
     lines[lineNumber] = {
       pxSinceLastBreak : pxSinceLastBreak,
       manualBreak : manualBreak,
@@ -207,6 +240,4 @@ exports.aceEditEvent = function(hook, callstack, editorInfo, rep, documentAttrib
     }
     lineNumber++;
   });
-
-  // console.log(lines);
 }
