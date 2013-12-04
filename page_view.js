@@ -19,8 +19,3 @@ exports.eejsBlock_dd_insert = function (hook_name, args, cb){
 exports.eejsBlock_dd_view = function (hook_name, args, cb){
   args.content = args.content + "<li><a href='#' onClick='$(\"#options-pageview\").click();'>Page View</a></li>";
 }
-
-<<<<<<< HEAD
-
-=======
->>>>>>> 0ffb40c43fd6bf79ef200b2fff13b5db3970d359
