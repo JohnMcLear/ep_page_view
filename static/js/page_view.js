@@ -25,6 +25,7 @@ if (!isMobile) {
         }
         $('#editorcontainer').css("top", "15px");
         $('#ep_page_ruler').show();
+        pad.changeViewOption('showLineNumbers', false);
       },
       disable: function() {
         $('#editorcontainer, iframe').removeClass('page_view');
