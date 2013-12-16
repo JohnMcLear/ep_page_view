@@ -192,12 +192,14 @@ exports.aceEditEvent = function(hook, callstack, editorInfo, rep, documentAttrib
   var lineNumber = 0;
 
   var HTMLLines = $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").children("div");
-  $('.pageBreakComputed').remove();
+  
+  // Remove all computed page breaks
+  $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").children("div").find('.pageBreakComputed').remove();
 
- $(HTMLLines).each(function(){ // For each line
-    var y = $(this).context.offsetTop;
+  $(HTMLLines).each(function(){ // For each line
+    var y = $(this).context.offsetTop; // y is the offset of this line
     var id = $(this)[0].id; // get the id of the link
-    var height = $(this).height();
+    var height = $(this).height(); // the height of the line
 
     // How many PX since last break?
     var lastLine = lineNumber-1;
@@ -211,6 +213,9 @@ exports.aceEditEvent = function(hook, callstack, editorInfo, rep, documentAttrib
 
     // Does it already have any children with teh class pageBreak?
     var manualBreak = $(this).children().hasClass("pageBreak");
+    
+    // Debug statement for lulz
+    // console.log(this, manualBreak); // This bit is fine
 
     // If it's a manualBreak then reset pxSinceLastBreak to 0;
     if(manualBreak) pxSinceLastBreak = 0;
@@ -241,4 +246,7 @@ exports.aceEditEvent = function(hook, callstack, editorInfo, rep, documentAttrib
     }
     lineNumber++;
   });
+
+  // Debuggable object containing all lines status  
+  // console.log(lines);
 }
