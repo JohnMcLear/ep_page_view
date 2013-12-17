@@ -1,0 +1,161 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'publish' ]
+2 info using npm@1.2.18
+3 info using node@v0.10.4
+4 verbose publish [ '.' ]
+5 verbose read json /home/jose/etherpad-lite/node_modules/ep_page_view/package.json
+6 verbose cache add [ '.', null ]
+7 verbose cache add name=undefined spec="." args=[".",null]
+8 verbose parsed url { protocol: null,
+8 verbose parsed url   slashes: null,
+8 verbose parsed url   auth: null,
+8 verbose parsed url   host: null,
+8 verbose parsed url   port: null,
+8 verbose parsed url   hostname: null,
+8 verbose parsed url   hash: null,
+8 verbose parsed url   search: null,
+8 verbose parsed url   query: null,
+8 verbose parsed url   pathname: '.',
+8 verbose parsed url   path: '.',
+8 verbose parsed url   href: '.' }
+9 silly lockFile 3a52ce78- .
+10 verbose lock . /home/jose/.npm/3a52ce78-.lock
+11 verbose read json package.json
+12 verbose tar pack [ '/home/jose/tmp/npm-8503/1387206244415-0.974120897706598/tmp.tgz',
+12 verbose tar pack   '.' ]
+13 verbose tarball /home/jose/tmp/npm-8503/1387206244415-0.974120897706598/tmp.tgz
+14 verbose folder .
+15 info prepublish ep_page_view@0.4.4
+16 silly lockFile 3a52ce78- .
+17 verbose lock . /home/jose/.npm/3a52ce78-.lock
+18 silly lockFile 4b9e536c-244415-0-974120897706598-tmp-tgz /home/jose/tmp/npm-8503/1387206244415-0.974120897706598/tmp.tgz
+19 verbose lock /home/jose/tmp/npm-8503/1387206244415-0.974120897706598/tmp.tgz /home/jose/.npm/4b9e536c-244415-0-974120897706598-tmp-tgz.lock
+20 silly lockFile 3a52ce78- .
+21 silly lockFile 3a52ce78- .
+22 silly lockFile 4b9e536c-244415-0-974120897706598-tmp-tgz /home/jose/tmp/npm-8503/1387206244415-0.974120897706598/tmp.tgz
+23 silly lockFile 4b9e536c-244415-0-974120897706598-tmp-tgz /home/jose/tmp/npm-8503/1387206244415-0.974120897706598/tmp.tgz
+24 verbose tar unpack /home/jose/tmp/npm-8503/1387206244415-0.974120897706598/tmp.tgz
+25 silly lockFile 436b106e-244415-0-974120897706598-package /home/jose/tmp/npm-8503/1387206244415-0.974120897706598/package
+26 verbose lock /home/jose/tmp/npm-8503/1387206244415-0.974120897706598/package /home/jose/.npm/436b106e-244415-0-974120897706598-package.lock
+27 silly lockFile 4b9e536c-244415-0-974120897706598-tmp-tgz /home/jose/tmp/npm-8503/1387206244415-0.974120897706598/tmp.tgz
+28 verbose lock /home/jose/tmp/npm-8503/1387206244415-0.974120897706598/tmp.tgz /home/jose/.npm/4b9e536c-244415-0-974120897706598-tmp-tgz.lock
+29 silly gunzTarPerm modes [ '755', '644' ]
+30 silly gunzTarPerm extractEntry package.json
+31 silly gunzTarPerm extractEntry README.md
+32 silly gunzTarPerm extractEntry index.js
+33 silly gunzTarPerm extractEntry page_view.js
+34 silly gunzTarPerm extractEntry .ep_initialized
+35 silly gunzTarPerm extractEntry .travis.yml
+36 silly gunzTarPerm extractEntry ep.json
+37 silly gunzTarPerm extractEntry static/css/iframe.css
+38 silly gunzTarPerm extractEntry static/css/page_view.css
+39 silly gunzTarPerm extractEntry static/js/page_view.js
+40 silly gunzTarPerm extractEntry static/js/shared.js
+41 silly gunzTarPerm extractEntry templates/page_view_entry.ejs
+42 silly gunzTarPerm extractEntry templates/page_view_menu.ejs
+43 verbose read json /home/jose/tmp/npm-8503/1387206244415-0.974120897706598/package/package.json
+44 silly lockFile 436b106e-244415-0-974120897706598-package /home/jose/tmp/npm-8503/1387206244415-0.974120897706598/package
+45 silly lockFile 436b106e-244415-0-974120897706598-package /home/jose/tmp/npm-8503/1387206244415-0.974120897706598/package
+46 silly lockFile 4b9e536c-244415-0-974120897706598-tmp-tgz /home/jose/tmp/npm-8503/1387206244415-0.974120897706598/tmp.tgz
+47 silly lockFile 4b9e536c-244415-0-974120897706598-tmp-tgz /home/jose/tmp/npm-8503/1387206244415-0.974120897706598/tmp.tgz
+48 verbose from cache /home/jose/tmp/npm-8503/1387206244415-0.974120897706598/package/package.json
+49 verbose tar pack [ '/home/jose/.npm/ep_page_view/0.4.4/package.tgz',
+49 verbose tar pack   '/home/jose/tmp/npm-8503/1387206244415-0.974120897706598/package' ]
+50 verbose tarball /home/jose/.npm/ep_page_view/0.4.4/package.tgz
+51 verbose folder /home/jose/tmp/npm-8503/1387206244415-0.974120897706598/package
+52 silly lockFile 436b106e-244415-0-974120897706598-package /home/jose/tmp/npm-8503/1387206244415-0.974120897706598/package
+53 verbose lock /home/jose/tmp/npm-8503/1387206244415-0.974120897706598/package /home/jose/.npm/436b106e-244415-0-974120897706598-package.lock
+54 silly lockFile 32a9f5a3-m-ep-page-view-0-4-4-package-tgz /home/jose/.npm/ep_page_view/0.4.4/package.tgz
+55 verbose lock /home/jose/.npm/ep_page_view/0.4.4/package.tgz /home/jose/.npm/32a9f5a3-m-ep-page-view-0-4-4-package-tgz.lock
+56 silly lockFile 436b106e-244415-0-974120897706598-package /home/jose/tmp/npm-8503/1387206244415-0.974120897706598/package
+57 silly lockFile 436b106e-244415-0-974120897706598-package /home/jose/tmp/npm-8503/1387206244415-0.974120897706598/package
+58 silly lockFile 32a9f5a3-m-ep-page-view-0-4-4-package-tgz /home/jose/.npm/ep_page_view/0.4.4/package.tgz
+59 silly lockFile 32a9f5a3-m-ep-page-view-0-4-4-package-tgz /home/jose/.npm/ep_page_view/0.4.4/package.tgz
+60 silly lockFile e6b6a086-e-npm-ep-page-view-0-4-4-package /home/jose/.npm/ep_page_view/0.4.4/package
+61 verbose lock /home/jose/.npm/ep_page_view/0.4.4/package /home/jose/.npm/e6b6a086-e-npm-ep-page-view-0-4-4-package.lock
+62 silly lockFile e6b6a086-e-npm-ep-page-view-0-4-4-package /home/jose/.npm/ep_page_view/0.4.4/package
+63 silly lockFile e6b6a086-e-npm-ep-page-view-0-4-4-package /home/jose/.npm/ep_page_view/0.4.4/package
+64 verbose tar unpack /home/jose/.npm/ep_page_view/0.4.4/package.tgz
+65 silly lockFile e6b6a086-e-npm-ep-page-view-0-4-4-package /home/jose/.npm/ep_page_view/0.4.4/package
+66 verbose lock /home/jose/.npm/ep_page_view/0.4.4/package /home/jose/.npm/e6b6a086-e-npm-ep-page-view-0-4-4-package.lock
+67 silly lockFile 32a9f5a3-m-ep-page-view-0-4-4-package-tgz /home/jose/.npm/ep_page_view/0.4.4/package.tgz
+68 verbose lock /home/jose/.npm/ep_page_view/0.4.4/package.tgz /home/jose/.npm/32a9f5a3-m-ep-page-view-0-4-4-package-tgz.lock
+69 silly gunzTarPerm modes [ '755', '644' ]
+70 silly gunzTarPerm extractEntry package.json
+71 silly gunzTarPerm extractEntry README.md
+72 silly gunzTarPerm extractEntry index.js
+73 silly gunzTarPerm extractEntry page_view.js
+74 silly gunzTarPerm extractEntry .ep_initialized
+75 silly gunzTarPerm extractEntry .travis.yml
+76 silly gunzTarPerm extractEntry ep.json
+77 silly gunzTarPerm extractEntry static/css/iframe.css
+78 silly gunzTarPerm extractEntry static/css/page_view.css
+79 silly gunzTarPerm extractEntry static/js/page_view.js
+80 silly gunzTarPerm extractEntry static/js/shared.js
+81 silly gunzTarPerm extractEntry templates/page_view_entry.ejs
+82 silly gunzTarPerm extractEntry templates/page_view_menu.ejs
+83 verbose read json /home/jose/.npm/ep_page_view/0.4.4/package/package.json
+84 silly lockFile e6b6a086-e-npm-ep-page-view-0-4-4-package /home/jose/.npm/ep_page_view/0.4.4/package
+85 silly lockFile e6b6a086-e-npm-ep-page-view-0-4-4-package /home/jose/.npm/ep_page_view/0.4.4/package
+86 silly lockFile 32a9f5a3-m-ep-page-view-0-4-4-package-tgz /home/jose/.npm/ep_page_view/0.4.4/package.tgz
+87 silly lockFile 32a9f5a3-m-ep-page-view-0-4-4-package-tgz /home/jose/.npm/ep_page_view/0.4.4/package.tgz
+88 silly shasum updated bytes 5503
+89 info shasum c5a9f52fa1515185c210f77b3f242cc73a0a3cc3
+89 info shasum /home/jose/.npm/ep_page_view/0.4.4/package.tgz
+90 verbose from cache /home/jose/.npm/ep_page_view/0.4.4/package/package.json
+91 verbose chmod /home/jose/.npm/ep_page_view/0.4.4/package.tgz 644
+92 verbose chown /home/jose/.npm/ep_page_view/0.4.4/package.tgz [ 1000, 1000 ]
+93 silly lockFile 3a52ce78- .
+94 silly publish { name: 'ep_page_view',
+94 silly publish   version: '0.4.4',
+94 silly publish   keywords:
+94 silly publish    [ 'page view',
+94 silly publish      'pv',
+94 silly publish      'preview',
+94 silly publish      'overview',
+94 silly publish      'page break',
+94 silly publish      'break',
+94 silly publish      'new page' ],
+94 silly publish   description: 'Add support to do \'page view\', with a toggle on/off option in Settings, also Page Breaks with Control Enter',
+94 silly publish   contributors:
+94 silly publish    [ { name: 'John McLear',
+94 silly publish        email: 'john@mclear.co.uk',
+94 silly publish        url: 'http://mclear.co.uk' },
+94 silly publish      { name: 'Robin Buse',
+94 silly publish        email: 'me@factor.cc',
+94 silly publish        url: 'https://factor.cc/' } ],
+94 silly publish   repository: { type: 'git', url: 'git://github.com/ether/ep_page_view.git' },
+94 silly publish   dependencies: {},
+94 silly publish   engines: { node: '*' },
+94 silly publish   readme: '# ep_page_view\n\nAdd support to do \'page view\' with a toggle on/off option in Settings.\n\n<img src="http://i.imgur.com/3e0m5.png" alt="Page view">\n\n## Set page view as default\n\n1. Open `settings.json`\n2. Append:\n   `ep_page_view_default : true`\n\n## License\nApache 2.\n',
+94 silly publish   readmeFilename: 'README.md',
+94 silly publish   _id: 'ep_page_view@0.4.4',
+94 silly publish   dist: { shasum: 'c5a9f52fa1515185c210f77b3f242cc73a0a3cc3' },
+94 silly publish   _from: '.' }
+95 verbose url raw ep_page_view
+96 verbose url resolving [ 'https://registry.npmjs.org/', './ep_page_view' ]
+97 verbose url resolved https://registry.npmjs.org/ep_page_view
+98 info trying registry request attempt 1 at 15:04:15
+99 http PUT https://registry.npmjs.org/ep_page_view
+100 http 409 https://registry.npmjs.org/ep_page_view
+101 verbose url raw ep_page_view
+102 verbose url resolving [ 'https://registry.npmjs.org/', './ep_page_view' ]
+103 verbose url resolved https://registry.npmjs.org/ep_page_view
+104 info trying registry request attempt 1 at 15:04:16
+105 http GET https://registry.npmjs.org/ep_page_view
+106 http 200 https://registry.npmjs.org/ep_page_view
+107 error publish fail Cannot publish over existing version.
+107 error publish fail Update the 'version' field in package.json and try again.
+107 error publish fail
+107 error publish fail If the previous version was published in error, see:
+107 error publish fail     npm help unpublish
+107 error publish fail
+107 error publish fail To automatically increment version numbers, see:
+107 error publish fail     npm help version
+108 error System Linux 3.5.0-18-generic
+109 error command "/usr/local/bin/node" "/usr/local/bin/npm" "publish"
+110 error cwd /home/jose/etherpad-lite/node_modules/ep_page_view
+111 error node -v v0.10.4
+112 error npm -v 1.2.18
+113 error code EPUBLISHCONFLICT
+114 verbose exit [ 1, true ]

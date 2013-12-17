@@ -203,11 +203,18 @@ exports.aceEditEvent = function(hook, callstack, editorInfo, rep, documentAttrib
 
     // How many PX since last break?
     var lastLine = lineNumber-1;
-    if(!lines[lastLine]){
+
+    // Note that this is written like this because I don't trust using y offsets..
+    if(!lines[lastLine]){ // if this is the first line..
       var previousY = 0;
       var pxSinceLastBreak = 0;
-    }else{
-      var previousY = lines[lastLine].pxSinceLastBreak;
+    }else{ // we're not processing the first line
+      if(lines[lastLine].pxSinceLastBreak == 0){ // if it's the second line..
+        // if it's getting the px of the first line..
+        var previousY = lines[lastLine].height; 
+      }else{
+        var previousY = lines[lastLine].pxSinceLastBreak;
+      }
       var pxSinceLastBreak = previousY + height;
     }
 
@@ -248,5 +255,5 @@ exports.aceEditEvent = function(hook, callstack, editorInfo, rep, documentAttrib
   });
 
   // Debuggable object containing all lines status  
-  // console.log(lines);
+  if(lines[1]) console.log(lines);
 }
