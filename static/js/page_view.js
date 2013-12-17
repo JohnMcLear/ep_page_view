@@ -255,5 +255,5 @@ exports.aceEditEvent = function(hook, callstack, editorInfo, rep, documentAttrib
   });
 
   // Debuggable object containing all lines status  
-  if(lines[1]) console.log(lines);
+  // if(lines) console.log(lines);
 }
