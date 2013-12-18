@@ -140,7 +140,6 @@ exports.aceCreateDomLine = function(name, context){
 
 function doInsertPageBreak(){
   this.editorInfo.ace_doReturnKey();
-  console.log("THIS WITH REP", this);
   var rep = this.rep;
   var documentAttributeManager = this.documentAttributeManager;
   if (!(rep.selStart && rep.selEnd)){ return; } // only continue if we have some caret position
