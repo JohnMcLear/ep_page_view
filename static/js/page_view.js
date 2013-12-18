@@ -140,21 +140,43 @@ exports.aceCreateDomLine = function(name, context){
 
 function doInsertPageBreak(){
   this.editorInfo.ace_doReturnKey();
+  console.log("THIS WITH REP", this);
   var rep = this.rep;
   var documentAttributeManager = this.documentAttributeManager;
   if (!(rep.selStart && rep.selEnd)){ return; } // only continue if we have some caret position
   var firstLine = rep.selStart[0]; // Get the first line
   var lastLine = Math.max(firstLine, rep.selEnd[0] - ((rep.selEnd[1] === 0) ? 1 : 0)); // Get the last line
-  _(_.range(firstLine, lastLine + 1)).each(function(i){ // For each line, either turn on or off task list
+  _(_.range(firstLine, lastLine + 1)).each(function(i){ // For each line, either turn on or off page break
     var isPageBreak = documentAttributeManager.getAttributeOnLine(i, 'pageBreak');
     if(!isPageBreak){ // if its already a PageBreak item
-      documentAttributeManager.setAttributeOnLine(i, 'pageBreak', 'pageBreak'); // make the line a task list
+      documentAttributeManager.setAttributeOnLine(i, 'pageBreak', 'pageBreak'); // make the line a page break	
     }else{
-      documentAttributeManager.removeAttributeOnLine(i, 'pageBreak'); // remove the task list from the line
+      documentAttributeManager.removeAttributeOnLine(i, 'pageBreak'); // remove the page break from the line
     }
   });
+
+  // Get caret focus
   this.editorInfo.ace_focus();
+
+  // Insert a line
   this.editorInfo.ace_doReturnKey();
+
+  // Get the document
+  var document = this.editorInfo.ace_getDocument();
+
+  // Update the selection from the rep
+  this.editorInfo.ace_updateBrowserSelectionFromRep();
+
+  // Get the current selection
+  var myselection = document.getSelection();
+
+  // Get the selections top offset
+  var caretOffsetTop = myselection.focusNode.offsetTop;
+
+  // Move to the new Y co-ord to bring the new page into focus
+  $('iframe[name="ace_outer"]').contents().find('#outerdocbody').scrollTop(caretOffsetTop-120); // Works in Chrome
+  $('iframe[name="ace_outer"]').contents().find('#outerdocbody').parent().scrollTop(caretOffsetTop-120); // Works in Firefox
+  // Sighs
 }
 
 // Once ace is initialized, we set ace_doInsertPageBreak and bind it to the context
