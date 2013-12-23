@@ -24,6 +24,8 @@ if (!isMobile) {
           $('#options-linenoscheck').attr("disabled", true);
         }
         $('#editorcontainer').css("top", "15px");
+        var containerTop = $('.toolbar').position().top + $('.toolbar').height() +5;
+        $('#editorcontainerbox').css("top", containerTop);
         $('#ep_page_ruler').show();
         pad.changeViewOption('showLineNumbers', false);
       },
