@@ -10,5 +10,8 @@ Add support to do 'page view' with a toggle on/off option in Settings.
 2. Append:
    `ep_page_view_default : true`
 
+## Embed parameter
+Suffix this on your pad URL to auto display page view when opening a pad ``&pageview=true``
+
 ## License
 Apache 2.
