@@ -28,16 +28,22 @@
 }
 
 .outerPV{
-  left:0px !important;
   width:850px !important;
-  margin:auto;
 }
 
 .outerBackground{
   background-color:#f7f7f7 !important;
-  margin:none;
+  width: 850px;
+  margin:auto;
   border:none;
 }
+
+.sidedivdelayed{
+  top: 7px !important;
+  left: auto !important;
+  padding-top: 100px !important;
+}
+
 .innerPV{
   background-color:#fff;
   border-radius: 5px 5px 0 0;
