@@ -210,16 +210,31 @@ exports.aceInitialized = function(hook, context){
 
 
 // Listen for Control Enter and if it is control enter then insert page break
+// Also listen for Up key to see if we need to replace focus at position 0.
 exports.aceKeyEvent = function(hook, callstack, editorInfo, rep, documentAttributeManager, evt){
   var evt = callstack.evt;
   var k = evt.keyCode;
+
+  // Control Enter
   if(evt.ctrlKey && k == 13 && evt.type == "keyup" ){
     callstack.editorInfo.ace_doInsertPageBreak();
     evt.preventDefault();
     return true;
-  }else{
-    return;
   }
+
+  // Up arrow so we can handle up arrow at top of document regain focus to 0 offset
+  if(k == 38){
+    var selStart = callstack.rep.selStart;
+    var selEnd = callstack.rep.selEnd;
+    if(selStart[0] == 0 && selStart[1] == 0 && selEnd[0] == 0 && selEnd[1] == 0){
+      // Move to the new Y co-ord to bring the new page into focus
+      $('iframe[name="ace_outer"]').contents().find('#outerdocbody').scrollTop(0); // Works in Chrome
+      $('iframe[name="ace_outer"]').contents().find('#outerdocbody').parent().scrollTop(0); // Works in Firefox
+      // Sighs
+    }
+    return true;
+  }
+  return;
 }
 
 exports.aceEditEvent = function(hook, callstack, editorInfo, rep, documentAttributeManager){
