@@ -13,6 +13,7 @@ var disabledPVCSS = "page-break-after: always; -webkit-region-break-inside: avoi
 
 if (!isMobile) {
   exports.postAceInit = function(hook, context){
+    reDrawPageBreaks();
     var pv = {
       enable: function() {
         $('#editorcontainer, iframe').addClass('page_view');
@@ -216,7 +217,8 @@ exports.aceKeyEvent = function(hook, callstack, editorInfo, rep, documentAttribu
   var k = evt.keyCode;
 
   // Control Enter
-  if(evt.ctrlKey && k == 13 && evt.type == "keyup" ){
+  // Note: We use keydown here to stop enter -> paste quick events firing a new page
+  if(evt.ctrlKey && k == 13 && evt.type == "keydown" ){
     callstack.editorInfo.ace_doInsertPageBreak();
     evt.preventDefault();
     return true;
@@ -247,12 +249,18 @@ exports.aceEditEvent = function(hook, callstack, editorInfo, rep, documentAttrib
   // Handle redrawing the page
   if(!callstack.callstack.docTextChanged) return;
 
+  // Redraw Page Breaks
+  reDrawPageBreaks();
+}
+
+reDrawPageBreaks = function(){
   var lines = {};
   var yHeight = 922.5; // This is dirty and I feel bad for it..
   var lineNumber = 0;
+  var pages = []; // Array of Y px of each page.
 
   var HTMLLines = $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").children("div");
-  
+
   // Remove all computed page breaks
   $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").children("div").find('.pageBreakComputed').remove();
 
@@ -271,7 +279,7 @@ exports.aceEditEvent = function(hook, callstack, editorInfo, rep, documentAttrib
     }else{ // we're not processing the first line
       if(lines[lastLine].pxSinceLastBreak == 0){ // if it's the second line..
         // if it's getting the px of the first line..
-        var previousY = lines[lastLine].height; 
+        var previousY = lines[lastLine].height;
       }else{
         var previousY = lines[lastLine].pxSinceLastBreak;
       }
@@ -280,7 +288,7 @@ exports.aceEditEvent = function(hook, callstack, editorInfo, rep, documentAttrib
 
     // Does it already have any children with teh class pageBreak?
     var manualBreak = $(this).children().hasClass("pageBreak");
-    
+
     // Debug statement for lulz
     // console.log(this, manualBreak); // This bit is fine
 
@@ -299,8 +307,10 @@ exports.aceEditEvent = function(hook, callstack, editorInfo, rep, documentAttrib
 
       // If it's not already a page break append a page break
       if(!isAlreadyPageBreak){
-        // top.console.log("Adding break");
-        // $(this).append("<div class='pageBreakComputed' contentEditable=false></div>");
+        top.console.log("Adding break as PX since last break is ", pxSinceLastBreak + height);
+        $(this).append("<div class='pageBreakComputed' contentEditable=false></div>");
+        pages.push(pxSinceLastBreak + height);
+
       }
       pxSinceLastBreak = 0;
     }
@@ -312,11 +322,11 @@ exports.aceEditEvent = function(hook, callstack, editorInfo, rep, documentAttrib
       id : id,
       y : y,
       height : height
-
     }
     lineNumber++;
   });
 
-  // Debuggable object containing all lines status  
-  // if(lines) console.log(lines);
-}
+  // Debuggable object containing all lines status
+  if(lines) console.log("Lines", lines);
+  if(pages) console.log("Pages", pages);
+} 
