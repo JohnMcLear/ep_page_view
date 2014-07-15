@@ -39,9 +39,6 @@
 }
 
 .sidedivdelayed{
-  top: 7px !important;
-  left: auto !important;
-  padding-top: 100px !important;
 }
 
 .innerPV{
@@ -79,6 +76,9 @@
   border-radius: 5px 0 0 0;
   border: 1px solid #ccc;
   border-right:none !important;
+  top: 7px !important;
+  left: auto !important;
+  padding-top: 100px !important;
 }
 
 .innerPVlineNumbers{

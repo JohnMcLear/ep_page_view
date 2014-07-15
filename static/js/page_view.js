@@ -33,6 +33,7 @@ if (!isMobile) {
 
       },
       disable: function() {
+        console.log("disabling");
         $('#editorcontainer, iframe').removeClass('page_view');
         $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").removeClass('innerPV');
         $('iframe[name="ace_outer"]').contents().find("iframe").removeClass('outerPV');
