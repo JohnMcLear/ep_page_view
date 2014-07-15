@@ -1,3 +1,7 @@
+#editorcontainerbox{
+  background-color:#F7F7F7;
+}
+
 @media (min-width: 1060px) {
   
   #editorcontainer.page_view {
