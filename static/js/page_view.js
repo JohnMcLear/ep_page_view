@@ -246,14 +246,18 @@ exports.aceEditEvent = function(hook, callstack, editorInfo, rep, documentAttrib
     return false;
   }
 
-  // Handle redrawing the page
-  if(!callstack.callstack.docTextChanged) return;
-
-  // Redraw Page Breaks
-  reDrawPageBreaks();
+  // Some more times to drop
+  if(callstack.callstack.type == "handleClick" || callstack.callstack.type == "idleWorkTimer" || !callstack.callstack.docTextChanged){
+    // console.log("not doing anything so it's all good", callstack);
+  }else{
+    // console.log("aceEditEvent so redrawing", callstack);
+    // Redraw Page Breaks
+    reDrawPageBreaks();
+  }
 }
 
 reDrawPageBreaks = function(){
+  // console.log("redrawing");
   var lines = {};
   var yHeight = 922.5; // This is dirty and I feel bad for it..
   var lineNumber = 0;
@@ -274,6 +278,7 @@ reDrawPageBreaks = function(){
 
     // Note that this is written like this because I don't trust using y offsets..
     if(!lines[lastLine]){ // if this is the first line..
+      // console.log("First line");
       var previousY = 0;
       var pxSinceLastBreak = 0;
     }else{ // we're not processing the first line
@@ -293,7 +298,11 @@ reDrawPageBreaks = function(){
     // console.log(this, manualBreak); // This bit is fine
 
     // If it's a manualBreak then reset pxSinceLastBreak to 0;
-    if(manualBreak) pxSinceLastBreak = 0;
+    if(manualBreak){
+      pxSinceLastBreak = 0;
+      // console.log("MANUAL pxSinceLastBreak", pxSinceLastBreak, "height", height);
+      pages.push(pxSinceLastBreak + height);
+    }
 
     // Should this be a line break?
     var computedBreak = ((pxSinceLastBreak + height) >= yHeight);
@@ -307,8 +316,9 @@ reDrawPageBreaks = function(){
 
       // If it's not already a page break append a page break
       if(!isAlreadyPageBreak){
-        top.console.log("Adding break as PX since last break is ", pxSinceLastBreak + height);
+        // console.log("Adding break as PX since last break is ", pxSinceLastBreak + height);
         $(this).append("<div class='pageBreakComputed' contentEditable=false></div>");
+        // console.log("AUTOMATIC pxSinceLastBreak", pxSinceLastBreak, "height", height);
         pages.push(pxSinceLastBreak + height);
 
       }
@@ -327,6 +337,6 @@ reDrawPageBreaks = function(){
   });
 
   // Debuggable object containing all lines status
-  if(lines) console.log("Lines", lines);
-  if(pages) console.log("Pages", pages);
+  // if(lines) console.log("Lines", lines);
+  // if(pages) console.log("Pages", pages);
 } 
