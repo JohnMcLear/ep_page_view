@@ -2,7 +2,7 @@
 
 Add support to do 'page view' with a toggle on/off option in Settings.
 
-<img src="http://i.imgur.com/3e0m5.png" alt="Page view">
+<img src="http://i.imgur.com/tanIwza.png" alt="Page view">
 
 ## Set page view as default
 
