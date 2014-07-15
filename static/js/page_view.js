@@ -24,6 +24,13 @@ if (!isMobile) {
         var containerTop = $('.toolbar').position().top + $('.toolbar').height() +5;
         $('#editorcontainerbox').css("top", containerTop);
         $('#ep_page_ruler').show();
+
+        // if line numbers are enabled..
+        if($('#options-linenoscheck').is(':checked')) {
+          $('iframe[name="ace_outer"]').contents().find('#sidediv').addClass("lineNumbersAndPageView");
+          $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").addClass('innerPVlineNumbers');
+        }
+
       },
       disable: function() {
         $('#editorcontainer, iframe').removeClass('page_view');
@@ -35,6 +42,11 @@ if (!isMobile) {
         var containerTop = $('.toolbar').position().top + $('.toolbar').height() +5;
         $('#editorcontainerbox').css("top", containerTop+"px");
         $('#editorcontainer').css("top", 0);
+
+        if($('#options-linenoscheck').is(':checked')) {
+          $('iframe[name="ace_outer"]').contents().find('#sidediv').removeClass("lineNumbersAndPageView");
+          $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").removeClass('innerPVlineNumbers');
+        }
       }
     }
     /* init */
