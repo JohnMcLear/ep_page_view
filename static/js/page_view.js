@@ -1,6 +1,7 @@
 var _, $, jQuery;
 var $ = require('ep_etherpad-lite/static/js/rjquery').$;
 var _ = require('ep_etherpad-lite/static/js/underscore');
+var padcookie = require('ep_etherpad-lite/static/js/pad_cookie').padcookie;
 
 var isMobile = $.browser.mobile;
 
@@ -37,6 +38,10 @@ if (!isMobile) {
       }
     }
     /* init */
+    if (padcookie.getPref("page_view")) {
+      $('#options-pageview').attr('checked','checked');
+      pv.enable();
+    }
     if($('#options-pageview').is(':checked')) {
       pv.enable();
     } else {
@@ -46,8 +51,10 @@ if (!isMobile) {
     $('#options-pageview').on('click', function() {
       if($('#options-pageview').is(':checked')) {
         pv.enable();
+        padcookie.setPref("page_view", true);
       } else {
         pv.disable();
+        padcookie.setPref("page_view", false);
       }
     });
     /* from URL param */
@@ -255,7 +262,10 @@ exports.aceEditEvent = function(hook, callstack, editorInfo, rep, documentAttrib
       // console.log( "iPB", isAlreadyPageBreak );
 
       // If it's not already a page break append a page break
-      if(!isAlreadyPageBreak)  $(this).append("<div class='pageBreakComputed' contentEditable=false></div>");
+      if(!isAlreadyPageBreak){
+        // top.console.log("Adding break");
+        // $(this).append("<div class='pageBreakComputed' contentEditable=false></div>");
+      }
       pxSinceLastBreak = 0;
     }
 
