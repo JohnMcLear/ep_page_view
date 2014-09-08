@@ -1,4 +1,4 @@
-.pageBreak{
+/*.pageBreak{
   page-break-after: always;
   -webkit-region-break-inside: avoid;
   border-bottom: 1px dotted #AAA;
@@ -10,20 +10,31 @@
   margin-top:100px;
   margin-bottom:100px;
   cursor: default;
-}
+}*/
 
-
-.pageBreakComputed{
-  page-break-after: always;
-  -webkit-region-break-inside: avoid;
-  border-bottom: 1px dotted #AAA;
-  margin-left:-102px !important;
+.pageViewOn {
   width:850px;
+  margin-left:-102px;
   height:40px;
-  border-top: 1px dotted #aaa;
   background-color:#f7f7f7;
   margin-top:100px;
   margin-bottom:100px;
+}
+
+.pageViewOff {
+  width:100%;
+  margin-left:0px;
+  height:12px;
+  background-color:#fff;
+  margin-top:0px;
+  margin-bottom:0px;
+}
+
+.pageBreakComputed, .pageBreak {
+  page-break-after: always;
+  -webkit-region-break-inside: avoid;
+  border-bottom: 1px dotted #AAA;
+  border-top: 1px dotted #aaa;
   cursor: default;
 }
 

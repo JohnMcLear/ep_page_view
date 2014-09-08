@@ -8,20 +8,24 @@ var isMobile = $.browser.mobile;
 // I'm not proud of these two lines or how I implement this but this is the best way of doing it without creating an edit event..
 // Etherpad wont allow you modify the class of a target line or piece of text without trying to fire that event on all other viewers
 // There is no hook or endpoint so we have to literally hack it in this way..
-var enabledPVCSS = "page-break-after: always; -webkit-region-break-inside: avoid;  border-bottom: 1px dotted #AAA;  width:850px; height:40px; margin-left:-102px; border-top: 1px dotted #aaa; background-color:#f7f7f7; margin-top:100px; margin-bottom:100px; cursor: default;";
-var disabledPVCSS = "page-break-after: always; -webkit-region-break-inside: avoid;  border-bottom: 1px dotted #AAA;  width:100%; margin-left:0px; border-top: 1px dotted #aaa; height:12px; background-color:#fff; margin-top:0px; margin-bottom:0px; cursor: default;";
+//var enabledPVCSS = "page-break-after: always; -webkit-region-break-inside: avoid;  border-bottom: 1px dotted #AAA;  width:850px; height:40px; margin-left:-102px; border-top: 1px dotted #aaa; background-color:#f7f7f7; margin-top:100px; margin-bottom:100px; cursor: default;";
+//var disabledPVCSS = "page-break-after: always; -webkit-region-break-inside: avoid;  border-bottom: 1px dotted #AAA;  width:100%; margin-left:0px; border-top: 1px dotted #aaa; height:12px; background-color:#fff; margin-top:0px; margin-bottom:0px; cursor: default;";
 
 if (!isMobile) {
-  exports.postAceInit = function(hook, context){
-    reDrawPageBreaks();
+  exports.postAceInit = function(hook, context){    
+    var $innerIframe = $('iframe[name="ace_outer"]').contents().find('iframe');
+    var $innerdocbody = $innerIframe.contents().find("#innerdocbody");
+    
     var pv = {
       enable: function() {
         $('#editorcontainer, iframe').addClass('page_view');
-        $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").addClass('innerPV');
-        $('iframe[name="ace_outer"]').contents().find("iframe").addClass('outerPV');
+        
+        $innerIframe.addClass('outerPV');
         $('iframe[name="ace_outer"]').contents().find('#outerdocbody').addClass("outerBackground");
-        $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").css("margin-left","0px");
-        $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").contents().find('.pageBreak').click(function(e){
+        
+        $innerdocbody.addClass('innerPV').css("margin-left","0px")
+
+        $innerdocbody.contents().find('.pageBreak').click(function(e){
           $(this).focusout().blur();
           top.console.log("Can't edit pagebreak Line");
           e.preventDefault();
@@ -31,32 +35,33 @@ if (!isMobile) {
         var containerTop = $('.toolbar').position().top + $('.toolbar').height() +5;
         $('#editorcontainerbox').css("top", containerTop);
         $('#ep_page_ruler').show();
-        $('iframe[name="ace_outer"]').contents().find('iframe').contents().find('head').append("<style>.pageBreak{"+enabledPVCSS+"}</style>");
+        $innerIframe.contents().find('.pageBreak').addClass('pageViewOn').removeClass('pageViewOff');
 
         // if line numbers are enabled..
         if($('#options-linenoscheck').is(':checked')) {
           $('iframe[name="ace_outer"]').contents().find('#sidediv').addClass("lineNumbersAndPageView");
-          $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").addClass('innerPVlineNumbers');
+          $innerdocbody.addClass('innerPVlineNumbers');
         }
-
+        reDrawPageBreaks();
       },
       disable: function() {
         console.log("disabling");
         $('#editorcontainer, iframe').removeClass('page_view');
-        $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").removeClass('innerPV');
-        $('iframe[name="ace_outer"]').contents().find("iframe").removeClass('outerPV');
-        $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").css("margin-left","-100px");
+        $innerIframe.contents().find("#innerdocbody").removeClass('innerPV');
+        $innerIframe.removeClass('outerPV');
+        $innerIframe.contents().find("#innerdocbody").css("margin-left","-100px");
         $('iframe[name="ace_outer"]').contents().find('#outerdocbody').removeClass("outerBackground");
         $('#ep_page_ruler').hide();
         var containerTop = $('.toolbar').position().top + $('.toolbar').height() +5;
         $('#editorcontainerbox').css("top", containerTop+"px");
         $('#editorcontainer').css("top", 0);
-        $('iframe[name="ace_outer"]').contents().find('iframe').contents().find('head').append("<style>.pageBreak{"+disabledPVCSS+"}</style>");
+        $innerIframe.contents().find('.pageBreak').removeClass('pageViewOn').addClass('pageViewOff');
 
         if($('#options-linenoscheck').is(':checked')) {
           $('iframe[name="ace_outer"]').contents().find('#sidediv').removeClass("lineNumbersAndPageView");
-          $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").removeClass('innerPVlineNumbers');
+          $innerIframe.contents().find("#innerdocbody").removeClass('innerPVlineNumbers');
         }
+        reDrawPageBreaks();
       }
     }
     /* init */
@@ -242,7 +247,7 @@ exports.aceKeyEvent = function(hook, callstack, editorInfo, rep, documentAttribu
 exports.aceEditEvent = function(hook, callstack, editorInfo, rep, documentAttributeManager){
   // If we're not in page view mode just hide all the things
   if($('#options-pageview').is(':checked')) {}else{
-    $('.pageBreakComputed').remove();
+    $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").children("div").find('.pageBreakComputed').remove();
     return false;
   }
 
@@ -257,7 +262,7 @@ exports.aceEditEvent = function(hook, callstack, editorInfo, rep, documentAttrib
 }
 
 reDrawPageBreaks = function(){
-  // console.log("redrawing");
+  console.log("redrawing");
   var lines = {};
   var yHeight = 922.5; // This is dirty and I feel bad for it..
   var lineNumber = 0;
@@ -317,7 +322,7 @@ reDrawPageBreaks = function(){
       // If it's not already a page break append a page break
       if(!isAlreadyPageBreak){
         // console.log("Adding break as PX since last break is ", pxSinceLastBreak + height);
-        $(this).append("<div class='pageBreakComputed' contentEditable=false></div>");
+        $(this).append("<div class='pageBreakComputed pageViewOn' contentEditable=false></div>");
         // console.log("AUTOMATIC pxSinceLastBreak", pxSinceLastBreak, "height", height);
         pages.push(pxSinceLastBreak + height);
 
