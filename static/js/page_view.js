@@ -5,15 +5,10 @@ var padcookie = require('ep_etherpad-lite/static/js/pad_cookie').padcookie;
 
 var isMobile = $.browser.mobile;
 
-// I'm not proud of these two lines or how I implement this but this is the best way of doing it without creating an edit event..
-// Etherpad wont allow you modify the class of a target line or piece of text without trying to fire that event on all other viewers
-// There is no hook or endpoint so we have to literally hack it in this way..
-//var enabledPVCSS = "page-break-after: always; -webkit-region-break-inside: avoid;  border-bottom: 1px dotted #AAA;  width:850px; height:40px; margin-left:-102px; border-top: 1px dotted #aaa; background-color:#f7f7f7; margin-top:100px; margin-bottom:100px; cursor: default;";
-//var disabledPVCSS = "page-break-after: always; -webkit-region-break-inside: avoid;  border-bottom: 1px dotted #AAA;  width:100%; margin-left:0px; border-top: 1px dotted #aaa; height:12px; background-color:#fff; margin-top:0px; margin-bottom:0px; cursor: default;";
-
 if (!isMobile) {
-  exports.postAceInit = function(hook, context){    
-    var $innerIframe = $('iframe[name="ace_outer"]').contents().find('iframe');
+  exports.postAceInit = function(hook, context){
+    var $outerIframeContents = $('iframe[name="ace_outer"]').contents();
+    var $innerIframe = $outerIframeContents.find('iframe');
     var $innerdocbody = $innerIframe.contents().find("#innerdocbody");
     
     var pv = {
@@ -21,7 +16,7 @@ if (!isMobile) {
         $('#editorcontainer, iframe').addClass('page_view');
         
         $innerIframe.addClass('outerPV');
-        $('iframe[name="ace_outer"]').contents().find('#outerdocbody').addClass("outerBackground");
+        $outerIframeContents.find('#outerdocbody').addClass("outerBackground");
         
         $innerdocbody.addClass('innerPV').css("margin-left","0px")
 
@@ -39,18 +34,18 @@ if (!isMobile) {
 
         // if line numbers are enabled..
         if($('#options-linenoscheck').is(':checked')) {
-          $('iframe[name="ace_outer"]').contents().find('#sidediv').addClass("lineNumbersAndPageView");
+          $outerIframeContents.find('#sidediv').addClass("lineNumbersAndPageView");
           $innerdocbody.addClass('innerPVlineNumbers');
         }
         reDrawPageBreaks();
       },
       disable: function() {
-        console.log("disabling");
+        // console.log("disabling");
         $('#editorcontainer, iframe').removeClass('page_view');
-        $innerIframe.contents().find("#innerdocbody").removeClass('innerPV');
+        $innerdocbody.removeClass('innerPV');
         $innerIframe.removeClass('outerPV');
-        $innerIframe.contents().find("#innerdocbody").css("margin-left","-100px");
-        $('iframe[name="ace_outer"]').contents().find('#outerdocbody').removeClass("outerBackground");
+        $innerdocbody.css("margin-left","-100px");
+        $outerIframeContents.find('#outerdocbody').removeClass("outerBackground");
         $('#ep_page_ruler').hide();
         var containerTop = $('.toolbar').position().top + $('.toolbar').height() +5;
         $('#editorcontainerbox').css("top", containerTop+"px");
@@ -58,8 +53,8 @@ if (!isMobile) {
         $innerIframe.contents().find('.pageBreak').removeClass('pageViewOn').addClass('pageViewOff');
 
         if($('#options-linenoscheck').is(':checked')) {
-          $('iframe[name="ace_outer"]').contents().find('#sidediv').removeClass("lineNumbersAndPageView");
-          $innerIframe.contents().find("#innerdocbody").removeClass('innerPVlineNumbers');
+          $outerIframeContents.find('#sidediv').removeClass("lineNumbersAndPageView");
+          $innerdocbody.removeClass('innerPVlineNumbers');
         }
         reDrawPageBreaks();
       }
@@ -235,8 +230,9 @@ exports.aceKeyEvent = function(hook, callstack, editorInfo, rep, documentAttribu
     var selEnd = callstack.rep.selEnd;
     if(selStart[0] == 0 && selStart[1] == 0 && selEnd[0] == 0 && selEnd[1] == 0){
       // Move to the new Y co-ord to bring the new page into focus
-      $('iframe[name="ace_outer"]').contents().find('#outerdocbody').scrollTop(0); // Works in Chrome
-      $('iframe[name="ace_outer"]').contents().find('#outerdocbody').parent().scrollTop(0); // Works in Firefox
+      var $outerdocbody = $('iframe[name="ace_outer"]').contents().find('#outerdocbody');
+      $outerdocbody.scrollTop(0); // Works in Chrome
+      $outerdocbody.parent().scrollTop(0); // Works in Firefox
       // Sighs
     }
     return true;
@@ -262,7 +258,7 @@ exports.aceEditEvent = function(hook, callstack, editorInfo, rep, documentAttrib
 }
 
 reDrawPageBreaks = function(){
-  console.log("redrawing");
+  // console.log("redrawing");
   var lines = {};
   var yHeight = 922.5; // This is dirty and I feel bad for it..
   var lineNumber = 0;
