@@ -10,6 +10,7 @@ var isMobile = $.browser.mobile;
 // There is no hook or endpoint so we have to literally hack it in this way..
 var enabledPVCSS = "page-break-after: always; -webkit-region-break-inside: avoid;  border-bottom: 1px dotted #AAA;  width:850px; height:40px; margin-left:-102px; border-top: 1px dotted #aaa; background-color:#f7f7f7; margin-top:100px; margin-bottom:100px; cursor: default;";
 var disabledPVCSS = "page-break-after: always; -webkit-region-break-inside: avoid;  border-bottom: 1px dotted #AAA;  width:100%; margin-left:0px; border-top: 1px dotted #aaa; height:12px; background-color:#fff; margin-top:0px; margin-bottom:0px; cursor: default;";
+var hidePVCSS = "page-break-after: always; -webkit-region-break-inside: avoid;  border-bottom: none;  width:100%; margin-left:0px; border-top: none; height:0px; background-color:#fff; margin-top:0px; margin-bottom:0px; cursor: default;";
 
 if (!isMobile) {
   exports.postAceInit = function(hook, context){
@@ -31,7 +32,7 @@ if (!isMobile) {
         var containerTop = $('.toolbar').position().top + $('.toolbar').height() +5;
         $('#editorcontainerbox').css("top", containerTop);
         $('#ep_page_ruler').show();
-        $('iframe[name="ace_outer"]').contents().find('iframe').contents().find('head').append("<style>.pageBreak{"+enabledPVCSS+"}</style>");
+        $('iframe[name="ace_outer"]').contents().find('iframe').contents().find('head').append("<style>.pageBreak, .pageBreakComputed{"+enabledPVCSS+"}</style>");
 
         // if line numbers are enabled..
         if($('#options-linenoscheck').is(':checked')) {
@@ -52,6 +53,7 @@ if (!isMobile) {
         $('#editorcontainerbox').css("top", containerTop+"px");
         $('#editorcontainer').css("top", 0);
         $('iframe[name="ace_outer"]').contents().find('iframe').contents().find('head').append("<style>.pageBreak{"+disabledPVCSS+"}</style>");
+        $('iframe[name="ace_outer"]').contents().find('iframe').contents().find('head').append("<style>.pageBreakComputed{"+hidePVCSS+"}</style>");
 
         if($('#options-linenoscheck').is(':checked')) {
           $('iframe[name="ace_outer"]').contents().find('#sidediv').removeClass("lineNumbersAndPageView");
