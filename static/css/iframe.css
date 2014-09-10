@@ -1,29 +1,26 @@
-.pageBreak{
-  page-break-after: always;
-  -webkit-region-break-inside: avoid;
-  border-bottom: 1px dotted #AAA;
+.pageViewOn {
   width:850px;
-  height:40px;
   margin-left:-102px;
-  border-top: 1px dotted #aaa;
+  height:40px;
   background-color:#f7f7f7;
   margin-top:100px;
   margin-bottom:100px;
-  cursor: default;
 }
 
+.pageViewOff {
+  width:100%;
+  margin-left:0px;
+  height:12px;
+  background-color:#fff;
+  margin-top:0px;
+  margin-bottom:0px;
+}
 
-.pageBreakComputed{
+.pageBreakComputed, .pageBreak {
   page-break-after: always;
   -webkit-region-break-inside: avoid;
   border-bottom: 1px dotted #AAA;
-  margin-left:-102px !important;
-  width:850px;
-  height:40px;
   border-top: 1px dotted #aaa;
-  background-color:#f7f7f7;
-  margin-top:100px;
-  margin-bottom:100px;
   cursor: default;
 }
 
