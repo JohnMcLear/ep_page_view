@@ -13,6 +13,7 @@ if (!isMobile) {
     
     var pv = {
       enable: function() {
+        if(pad.plugins && pad.plugins.ep_slideshow && pad.plugins.ep_slideshow.isEnabled) return false;
         $('#editorcontainer, iframe').addClass('page_view');
         
         $innerIframe.addClass('outerPV');
@@ -40,6 +41,7 @@ if (!isMobile) {
         reDrawPageBreaks();
       },
       disable: function() {
+        $('#options-pageview').attr("checked", false);
         // console.log("disabling");
         $('#editorcontainer, iframe').removeClass('page_view');
         $innerdocbody.removeClass('innerPV');
@@ -94,6 +96,9 @@ if (!isMobile) {
         ace.ace_doInsertPageBreak();
       },'insertPageBreak' , true);
     });
+
+    if(!pad.plugins) pad.plugins = {};
+    pad.plugins.ep_page_view = pv;
   };
 } else {
   $('input#options-pageview').hide();
@@ -340,4 +345,5 @@ reDrawPageBreaks = function(){
   // Debuggable object containing all lines status
   // if(lines) console.log("Lines", lines);
   // if(pages) console.log("Pages", pages);
+
 } 
