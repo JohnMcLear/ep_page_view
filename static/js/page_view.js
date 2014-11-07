@@ -3,107 +3,105 @@ var $ = require('ep_etherpad-lite/static/js/rjquery').$;
 var _ = require('ep_etherpad-lite/static/js/underscore');
 var padcookie = require('ep_etherpad-lite/static/js/pad_cookie').padcookie;
 
-var isMobile = $.browser.mobile;
-
-if (!isMobile) {
-  exports.postAceInit = function(hook, context){
-    var $outerIframeContents = $('iframe[name="ace_outer"]').contents();
-    var $innerIframe = $outerIframeContents.find('iframe');
-    var $innerdocbody = $innerIframe.contents().find("#innerdocbody");
+exports.postAceInit = function(hook, context){
+  var $outerIframeContents = $('iframe[name="ace_outer"]').contents();
+  var $innerIframe = $outerIframeContents.find('iframe');
+  var $innerdocbody = $innerIframe.contents().find("#innerdocbody");
     
-    var pv = {
-      enable: function() {
-        if(pad.plugins && pad.plugins.ep_slideshow && pad.plugins.ep_slideshow.isEnabled) return false;
-        $('#editorcontainer, iframe').addClass('page_view');
-        
-        $innerIframe.addClass('outerPV');
-        $outerIframeContents.find('#outerdocbody').addClass("outerBackground");
-        
-        $innerdocbody.addClass('innerPV').css("margin-left","0px")
+  var pv = {
 
-        $innerdocbody.contents().find('.pageBreak').click(function(e){
-          $(this).focusout().blur();
-          top.console.log("Can't edit pagebreak Line");
-          e.preventDefault();
-          return false;
-        });
-        $('#editorcontainer').css("top", "15px");
-        var containerTop = $('.toolbar').position().top + $('.toolbar').height() +5;
-        $('#editorcontainerbox').css("top", containerTop);
-        $('#ep_page_ruler').show();
-        $innerIframe.contents().find('.pageBreak').addClass('pageViewOn').removeClass('pageViewOff');
+    enable: function() {
+      if(pad.plugins && pad.plugins.ep_slideshow && pad.plugins.ep_slideshow.isEnabled) return false;
+      $('#editorcontainer, iframe').addClass('page_view');
+      $innerIframe.addClass('outerPV');
+      $outerIframeContents.find('#outerdocbody').addClass("outerBackground");
+      $innerdocbody.addClass('innerPV').css("margin-left","0px")
 
-        // if line numbers are enabled..
-        if($('#options-linenoscheck').is(':checked')) {
-          $outerIframeContents.find('#sidediv').addClass("lineNumbersAndPageView");
-          $innerdocbody.addClass('innerPVlineNumbers');
-        }
-        reDrawPageBreaks();
-      },
-      disable: function() {
-        $('#options-pageview').attr("checked", false);
-        // console.log("disabling");
-        $('#editorcontainer, iframe').removeClass('page_view');
-        $innerdocbody.removeClass('innerPV');
-        $innerIframe.removeClass('outerPV');
-        $innerdocbody.css("margin-left","-100px");
-        $outerIframeContents.find('#outerdocbody').removeClass("outerBackground");
-        $('#ep_page_ruler').hide();
-        var containerTop = $('.toolbar').position().top + $('.toolbar').height() +5;
-        $('#editorcontainerbox').css("top", containerTop+"px");
-        $('#editorcontainer').css("top", 0);
-        $innerIframe.contents().find('.pageBreak').removeClass('pageViewOn').addClass('pageViewOff');
+      $innerdocbody.contents().find('.pageBreak').click(function(e){
+        $(this).focusout().blur();
+        top.console.log("Can't edit pagebreak Line");
+        e.preventDefault();
+        return false;
+      });
 
-        if($('#options-linenoscheck').is(':checked')) {
-          $outerIframeContents.find('#sidediv').removeClass("lineNumbersAndPageView");
-          $innerdocbody.removeClass('innerPVlineNumbers');
-        }
-        reDrawPageBreaks();
+      $('#editorcontainer').css("top", "15px");
+      var containerTop = $('.toolbar').position().top + $('.toolbar').height() +5;
+      $('#editorcontainerbox').css("top", containerTop);
+      $('#ep_page_ruler').show();
+      $innerIframe.contents().find('.pageBreak').addClass('pageViewOn').removeClass('pageViewOff');
+
+      // if line numbers are enabled..
+      if($('#options-linenoscheck').is(':checked')) {
+        $outerIframeContents.find('#sidediv').addClass("lineNumbersAndPageView");
+        $innerdocbody.addClass('innerPVlineNumbers');
       }
+      reDrawPageBreaks();
+    },
+
+    disable: function() {
+      $('#options-pageview').attr("checked", false);
+      // console.log("disabling");
+      $('#editorcontainer, iframe').removeClass('page_view');
+      $innerdocbody.removeClass('innerPV');
+      $innerIframe.removeClass('outerPV');
+      $innerdocbody.css("margin-left","-100px");
+      $outerIframeContents.find('#outerdocbody').removeClass("outerBackground");
+      $('#ep_page_ruler').hide();
+      var containerTop = $('.toolbar').position().top + $('.toolbar').height() +5;
+      $('#editorcontainerbox').css("top", containerTop+"px");
+      $('#editorcontainer').css("top", 0);
+      $innerIframe.contents().find('.pageBreak').removeClass('pageViewOn').addClass('pageViewOff');
+       if($('#options-linenoscheck').is(':checked')) {
+        $outerIframeContents.find('#sidediv').removeClass("lineNumbersAndPageView");
+        $innerdocbody.removeClass('innerPVlineNumbers');
+      }
+      reDrawPageBreaks();
     }
-    /* init */
-    if (padcookie.getPref("page_view")) {
-      $('#options-pageview').attr('checked','checked');
-      pv.enable();
-    }
+  }
+
+  /* init */
+  if (padcookie.getPref("page_view")) {
+    $('#options-pageview').attr('checked','checked');
+    pv.enable();
+  }
+  if($('#options-pageview').is(':checked')) {
+    pv.enable();
+  } else {
+    pv.disable();
+  }
+
+  /* on click */
+  $('#options-pageview').on('click', function() {
     if($('#options-pageview').is(':checked')) {
       pv.enable();
+      padcookie.setPref("page_view", true);
     } else {
       pv.disable();
+      padcookie.setPref("page_view", false);
     }
-    /* on click */
-    $('#options-pageview').on('click', function() {
-      if($('#options-pageview').is(':checked')) {
-        pv.enable();
-        padcookie.setPref("page_view", true);
-      } else {
-        pv.disable();
-        padcookie.setPref("page_view", false);
-      }
-    });
-    /* from URL param */
-    var urlContainspageviewTrue = (getParam("pageview") == "true"); // if the url param is set
-    if(urlContainspageviewTrue){
-      $('#options-pageview').attr('checked','checked');
-      pv.enable();
-    }else if (getParam("pageview") == "false"){
-      $('#options-pageview').attr('checked',false);
-      pv.disable();
-    }
-    // Bind the event handler to the toolbar buttons
-    $('#insertPageBreak').on('click', function(){
-      context.ace.callWithAce(function(ace){
-        ace.ace_doInsertPageBreak();
-      },'insertPageBreak' , true);
-    });
+  });
 
-    if(!pad.plugins) pad.plugins = {};
-    pad.plugins.ep_page_view = pv;
-  };
-} else {
-  $('input#options-pageview').hide();
-  $('label[for=options-pageview]').hide();
-}
+  /* from URL param */
+  var urlContainspageviewTrue = (getParam("pageview") == "true"); // if the url param is set
+  if(urlContainspageviewTrue){
+    $('#options-pageview').attr('checked','checked');
+    pv.enable();
+  }else if (getParam("pageview") == "false"){
+    $('#options-pageview').attr('checked',false);
+    pv.disable();
+  }
+
+  // Bind the event handler to the toolbar buttons
+  $('#insertPageBreak').on('click', function(){
+    context.ace.callWithAce(function(ace){
+      ace.ace_doInsertPageBreak();
+    },'insertPageBreak' , true);
+  });
+
+  if(!pad.plugins) pad.plugins = {};
+  pad.plugins.ep_page_view = pv;
+};
+
 
 function getParam(sname){
   var params = location.search.substr(location.search.indexOf("?")+1);
