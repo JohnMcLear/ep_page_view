@@ -20,3 +20,30 @@
   }
 
 }
+
+/* For LESS THAN 900px wide */
+@media screen (max-width: 900px) {
+  #innerdocbody > div {
+    margin-left:0px;
+    margin-right:0px;
+  }
+
+  .outerPV{
+    width:100% !important;
+  } 
+
+  .outerBackground{
+/*    background-color:#fff !important;*/
+  }
+
+  #innerdocbody{
+/*    padding-top:0px !important;*/
+  } 
+
+  .innerPV{
+    border:none;
+    box-shadow:none;
+  }
+
+}
+

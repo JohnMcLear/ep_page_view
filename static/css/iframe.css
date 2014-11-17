@@ -35,9 +35,6 @@
   border:none;
 }
 
-.sidedivdelayed{
-}
-
 .innerPV{
   background-color:#fff;
   border-radius: 5px 5px 0 0;
@@ -81,4 +78,57 @@
 
 .innerPVlineNumbers{
   border-radius: 0px 5px 0 0;
+}
+
+/* For LESS THAN 900px wide */
+@media (max-width: 900px) {
+  #innerdocbody > div {
+    margin-left:10px !important;
+    margin-right:0px;
+  }
+
+  .outerPV{
+    width:100% !important;
+    left:0px !important;
+  } 
+
+  .outerBackground{
+    background-color:#fff !important;
+  }
+
+  #innerdocbody{
+   padding-top:00px !important;
+  } 
+
+  .innerPV{
+    border:none;
+    box-shadow:none;
+  }
+
+}
+
+/* For screens GREATER THAN 901px wide */
+@media (min-width: 901px) {
+  .outerPV{
+    width:100% !important;
+  } 
+
+  .outerBackground{
+    background-color:#6e6e !important;
+  }
+
+  #innerdocbody{
+    padding-top:100px !important;
+  } 
+
+  #innerdocbody > div {
+    margin-left:100px;
+    margin-right:100px;
+  }
+
+  .innerPV{
+    border:1px solid #ccc;
+    box-shadow:none;
+  }
+
 }
