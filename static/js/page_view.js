@@ -24,9 +24,9 @@ exports.postAceInit = function(hook, context){
         return false;
       });
 
-      $('#editorcontainer').css("top", "15px");
-      var containerTop = $('.toolbar').position().top + $('.toolbar').height() +5;
-      $('#editorcontainerbox').css("top", containerTop);
+      // $('#editorcontainer').css("top", "15px");
+      // var containerTop = $('.toolbar').position().top + $('.toolbar').height() +5;
+      // $('#editorcontainerbox').css("top", containerTop);
       $('#ep_page_ruler').show();
       $innerIframe.contents().find('.pageBreak').addClass('pageViewOn').removeClass('pageViewOff');
 
@@ -47,9 +47,9 @@ exports.postAceInit = function(hook, context){
       $innerdocbody.css("margin-left","-100px");
       $outerIframeContents.find('#outerdocbody').removeClass("outerBackground");
       $('#ep_page_ruler').hide();
-      var containerTop = $('.toolbar').position().top + $('.toolbar').height() +5;
-      $('#editorcontainerbox').css("top", containerTop+"px");
-      $('#editorcontainer').css("top", 0);
+      // var containerTop = $('.toolbar').position().top + $('.toolbar').height() +5;
+      // $('#editorcontainerbox').css("top", containerTop+"px");
+      // $('#editorcontainer').css("top", 0);
       $innerIframe.contents().find('.pageBreak').removeClass('pageViewOn').addClass('pageViewOff');
        if($('#options-linenoscheck').is(':checked')) {
         $outerIframeContents.find('#sidediv').removeClass("lineNumbersAndPageView");
