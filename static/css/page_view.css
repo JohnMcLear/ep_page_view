@@ -2,7 +2,7 @@
   background-color:#F7F7F7;
 }
 
-@media (min-width: 1060px) {
+@media (min-width: 921px) {
   
   #editorcontainer.page_view {
     overflow: hidden;
@@ -13,6 +13,11 @@
 
   #editorcontainerbox{
     background-color:#f7f7f7;
+    top:0px;
+  }
+  #editorcontainer{
+    top:0px;
+    padding-top:20px;
   }
 
   #editorloadingbox{
@@ -21,28 +26,18 @@
 
 }
 
-/* For LESS THAN 900px wide */
-@media screen (max-width: 900px) {
-  #innerdocbody > div {
-    margin-left:0px;
-    margin-right:0px;
-  }
-
-  .outerPV{
-    width:100% !important;
-  } 
-
+@media (max-width: 920px) {
+  
   .outerBackground{
-/*    background-color:#fff !important;*/
+    width:100%;
   }
 
-  #innerdocbody{
-/*    padding-top:0px !important;*/
-  } 
-
-  .innerPV{
-    border:none;
-    box-shadow:none;
+  #editorcontainerbox{
+    top:0px;
+  }
+  #editorcontainer{
+    top:0px;
+    border-top: 1px solid #ccc;
   }
 
 }
