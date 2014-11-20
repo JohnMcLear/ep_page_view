@@ -19,26 +19,26 @@
 7 verbose parsed url   href: '.' }
 8 silly lockFile 3a52ce78- .
 9 verbose lock . /home/jose/.npm/3a52ce78-.lock
-10 verbose tar pack [ '/home/jose/.npm/ep_page_view/0.5.10/package.tgz', '.' ]
-11 verbose tarball /home/jose/.npm/ep_page_view/0.5.10/package.tgz
+10 verbose tar pack [ '/home/jose/.npm/ep_page_view/0.5.14/package.tgz', '.' ]
+11 verbose tarball /home/jose/.npm/ep_page_view/0.5.14/package.tgz
 12 verbose folder .
-13 info prepublish ep_page_view@0.5.10
+13 info prepublish ep_page_view@0.5.14
 14 silly lockFile 1f1177db-tar tar://.
 15 verbose lock tar://. /home/jose/.npm/1f1177db-tar.lock
-16 silly lockFile 6e818dcc--ep-page-view-0-5-10-package-tgz tar:///home/jose/.npm/ep_page_view/0.5.10/package.tgz
-17 verbose lock tar:///home/jose/.npm/ep_page_view/0.5.10/package.tgz /home/jose/.npm/6e818dcc--ep-page-view-0-5-10-package-tgz.lock
+16 silly lockFile 0ad86c08--ep-page-view-0-5-14-package-tgz tar:///home/jose/.npm/ep_page_view/0.5.14/package.tgz
+17 verbose lock tar:///home/jose/.npm/ep_page_view/0.5.14/package.tgz /home/jose/.npm/0ad86c08--ep-page-view-0-5-14-package-tgz.lock
 18 silly lockFile 1f1177db-tar tar://.
 19 silly lockFile 1f1177db-tar tar://.
-20 silly lockFile 6e818dcc--ep-page-view-0-5-10-package-tgz tar:///home/jose/.npm/ep_page_view/0.5.10/package.tgz
-21 silly lockFile 6e818dcc--ep-page-view-0-5-10-package-tgz tar:///home/jose/.npm/ep_page_view/0.5.10/package.tgz
-22 silly lockFile ece56cd0--npm-ep-page-view-0-5-10-package /home/jose/.npm/ep_page_view/0.5.10/package
-23 verbose lock /home/jose/.npm/ep_page_view/0.5.10/package /home/jose/.npm/ece56cd0--npm-ep-page-view-0-5-10-package.lock
-24 silly lockFile ece56cd0--npm-ep-page-view-0-5-10-package /home/jose/.npm/ep_page_view/0.5.10/package
-25 silly lockFile ece56cd0--npm-ep-page-view-0-5-10-package /home/jose/.npm/ep_page_view/0.5.10/package
+20 silly lockFile 0ad86c08--ep-page-view-0-5-14-package-tgz tar:///home/jose/.npm/ep_page_view/0.5.14/package.tgz
+21 silly lockFile 0ad86c08--ep-page-view-0-5-14-package-tgz tar:///home/jose/.npm/ep_page_view/0.5.14/package.tgz
+22 silly lockFile 206657c1--npm-ep-page-view-0-5-14-package /home/jose/.npm/ep_page_view/0.5.14/package
+23 verbose lock /home/jose/.npm/ep_page_view/0.5.14/package /home/jose/.npm/206657c1--npm-ep-page-view-0-5-14-package.lock
+24 silly lockFile 206657c1--npm-ep-page-view-0-5-14-package /home/jose/.npm/ep_page_view/0.5.14/package
+25 silly lockFile 206657c1--npm-ep-page-view-0-5-14-package /home/jose/.npm/ep_page_view/0.5.14/package
 26 silly lockFile 3a52ce78- .
 27 silly lockFile 3a52ce78- .
 28 silly publish { name: 'ep_page_view',
-28 silly publish   version: '0.5.10',
+28 silly publish   version: '0.5.14',
 28 silly publish   keywords:
 28 silly publish    [ 'page view',
 28 silly publish      'pv',
@@ -60,43 +60,40 @@
 28 silly publish   engines: { node: '*' },
 28 silly publish   readme: '# Etherpad Page View\n\n<img src="http://i.imgur.com/tanIwza.png" alt="Page view">\n\nAdd support to do \'page view\' with a toggle on/off option in Settings.  \n\nFeatures:\n* Ability to turn on/off page view\n* Setting to turn on/off page view\n* Setting Persistance\n* Ability to add page breaks (Using Control Enter)\n* Automatic detection of page length to create pages\n* Toggle on/off Line Numbers support without breaking styling\n* Maintain page breaks when in non-page view.\n\n## Set page view as default\n\n1. Open `settings.json`\n2. Append:\n   `"ep_page_view_default" : true,`\n\n## Embed parameter\nSuffix this on your pad URL to auto display page view when opening a pad ``&pageview=true``\n\n## License\nApache 2.\n\n## Donations\nDonations can be made via http://etherpad.org\n',
 28 silly publish   readmeFilename: 'README.md',
-28 silly publish   gitHead: 'ba0a1987cc923b33499b98dbd81144809b00ff60',
+28 silly publish   gitHead: '555b6a57f149b7f4eb5707208ff3159615eb713a',
 28 silly publish   bugs: { url: 'https://github.com/ether/ep_page_view/issues' },
 28 silly publish   homepage: 'https://github.com/ether/ep_page_view',
-28 silly publish   _id: 'ep_page_view@0.5.10',
+28 silly publish   _id: 'ep_page_view@0.5.14',
 28 silly publish   scripts: {},
-28 silly publish   _shasum: 'cfb42a58b40922fc7ff74e3bcc4ec46f8184e54a',
+28 silly publish   _shasum: '5294eaa65f42ca211c8caf2be13e5d5db8159fd7',
 28 silly publish   _from: '.' }
 29 verbose request where is /ep_page_view
 30 verbose request registry https://registry.npmjs.org/
-31 verbose request id ee46e91ec12eae04
+31 verbose request id 94a956119349c726
 32 verbose url raw /ep_page_view
 33 verbose url resolving [ 'https://registry.npmjs.org/', './ep_page_view' ]
 34 verbose url resolved https://registry.npmjs.org/ep_page_view
 35 verbose request where is https://registry.npmjs.org/ep_page_view
-36 info trying registry request attempt 1 at 18:18:53
+36 info trying registry request attempt 1 at 13:11:34
 37 http PUT https://registry.npmjs.org/ep_page_view
 38 http 403 https://registry.npmjs.org/ep_page_view
-39 verbose headers { date: 'Thu, 06 Nov 2014 18:18:55 GMT',
+39 verbose headers { date: 'Thu, 20 Nov 2014 13:11:35 GMT',
 39 verbose headers   server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
 39 verbose headers   'content-type': 'application/json',
 39 verbose headers   'cache-control': 'max-age=60',
-39 verbose headers   'content-length': '286',
+39 verbose headers   'content-length': '3592',
 39 verbose headers   'accept-ranges': 'bytes',
 39 verbose headers   via: '1.1 varnish',
-39 verbose headers   'x-served-by': 'cache-ams4121-AMS',
+39 verbose headers   'x-served-by': 'cache-lcy1121-LCY',
 39 verbose headers   'x-cache': 'MISS',
 39 verbose headers   'x-cache-hits': '0',
-39 verbose headers   'x-timer': 'S1415297935.304183,VS0,VE623',
+39 verbose headers   'x-timer': 'S1416489094.314891,VS0,VE736',
 39 verbose headers   'keep-alive': 'timeout=10, max=50',
 39 verbose headers   connection: 'Keep-Alive' }
 40 error publish Failed PUT 403
-41 error Error: forbidden user: klsdjfs not authorized to modify ep_page_view
-41 error Changed: dist-tags.latest "0.5.9" -> "0.5.10"
-41 error Added: versions.0.5.10
-41 error Changed: time.modified "2014-09-10T19:39:53.760Z" -> "2014-11-06T18:18:57.959Z"
-41 error Added: time.0.5.10
-41 error Added: _attachments: ep_page_view
+41 error Error: forbidden cannot modify pre-existing version: 0.5.14
+41 error old={"name":"ep_page_view","version":"0.5.14","keywords":["page view","pv","preview","overview","page break","break","new page"],"description":"Add support to do 'page view', with a toggle on/off option in Settings, also Page Breaks with Control Enter","contributors":[{"name":"John McLear","email":"john@mclear.co.uk","url":"http://mclear.co.uk"},{"name":"Robin Buse","email":"me@factor.cc","url":"https://factor.cc/"}],"repository":{"type":"git","url":"git://github.com/ether/ep_page_view.git"},"dependencies":{},"engines":{"node":"*"},"gitHead":"555b6a57f149b7f4eb5707208ff3159615eb713a","bugs":{"url":"https://github.com/ether/ep_page_view/issues"},"homepage":"https://github.com/ether/ep_page_view","_id":"ep_page_view@0.5.14","scripts":{},"_shasum":"1526493bbc2b836927d4da3e9dbf66b049e1be75","_from":".","_npmVersion":"1.4.28","_npmUser":{"name":"johnyma22","email":"john@mclear.co.uk"},"maintainers":[{"name":"johnyma22","email":"john@mclear.co.uk"},{"name":"0ip","email":"me@factor.cc"}],"dist":{"shasum":"1526493bbc2b836927d4da3e9dbf66b049e1be75","tarball":"http://registry.npmjs.org/ep_page_view/-/ep_page_view-0.5.14.tgz"}}
+41 error new={"name":"ep_page_view","version":"0.5.14","keywords":["page view","pv","preview","overview","page break","break","new page"],"description":"Add support to do 'page view', with a toggle on/off option in Settings, also Page Breaks with Control Enter","contributors":[{"name":"John McLear","email":"john@mclear.co.uk","url":"http://mclear.co.uk"},{"name":"Robin Buse","email":"me@factor.cc","url":"https://factor.cc/"}],"repository":{"type":"git","url":"git://github.com/ether/ep_page_view.git"},"dependencies":{},"engines":{"node":"*"},"readme":"# Etherpad Page View\u000a\u000a<img src=\"http://i.imgur.com/tanIwza.png\" alt=\"Page view\">\u000a\u000aAdd support to do 'page view' with a toggle on/off option in Settings.  \u000a\u000aFeatures:\u000a* Ability to turn on/off page view\u000a* Setting to turn on/off page view\u000a* Setting Persistance\u000a* Ability to add page breaks (Using Control Enter)\u000a* Automatic detection of page length to create pages\u000a* Toggle on/off Line Numbers support without breaking styling\u000a* Maintain page breaks when in non-page view.\u000a\u000a## Set page view as default\u000a\u000a1. Open `settings.json`\u000a2. Append:\u000a   `\"ep_page_view_default\" : true,`\u000a\u000a## Embed parameter\u000aSuffix this on your pad URL to auto display page view when opening a pad ``&pageview=true``\u000a\u000a## License\u000aApache 2.\u000a\u000a## Donations\u000aDonations can be made via http://etherpad.org\u000a","readmeFilename":"README.md","gitHead":"555b6a57f149b7f4eb5707208ff3159615eb713a","bugs":{"url":"https://github.com/ether/ep_page_view/issues"},"homepage":"https://github.com/ether/ep_page_view","_id":"ep_page_view@0.5.14","scripts":{},"_shasum":"5294eaa65f42ca211c8caf2be13e5d5db8159fd7","_from":".","_npmVersion":"1.4.28","_npmUser":{"name":"johnyma22","email":"john@mclear.co.uk"},"maintainers":[{"name":"johnyma22","email":"john@mclear.co.uk"}],"dist":{"shasum":"5294eaa65f42ca211c8caf2be13e5d5db8159fd7","tarball":"http://registry.npmjs.org/ep_page_view/-/ep_page_view-0.5.14.tgz"}}: ep_page_view
 41 error     at RegClient.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:308:14)
 41 error     at Request._callback (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:246:65)
 41 error     at Request.self.callback (/usr/local/lib/node_modules/npm/node_modules/request/request.js:236:22)
@@ -112,7 +109,7 @@
 42 error     <http://github.com/npm/npm/issues>
 43 error System Linux 3.13.0-39-generic
 44 error command "/usr/local/bin/node" "/usr/local/bin/npm" "publish"
-45 error cwd /home/jose/etherpad-lite/node_modules/ep_page_view
+45 error cwd /home/jose/ep_page_view
 46 error node -v v0.10.33
 47 error npm -v 1.4.28
 48 verbose exit [ 1, true ]
