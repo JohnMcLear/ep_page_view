@@ -7,8 +7,22 @@
   margin-bottom:0px;
 }
 
+.lineNumbersAndPageView{
+  padding-right:12px !important;
+}
+
 
 /* For LESS THAN 850px wide */
+@media (max-width : 849px) {
+  #innerdocbody{
+    padding-top:0px !important;
+    margin-left:0px !important;
+  } 
+  #sidediv{
+    padding-right:4px !important
+  }
+}
+
 @media (max-width : 930px) {
   #innerdocbody > div {
     margin-left:0px !important;
@@ -18,20 +32,17 @@
     width:100%;
   }
 
-  #innerdocbody{
-   padding-top:0px !important;
-  } 
-
   .innerPV{
     border:none;
     box-shadow:none;
   }
+
 }
 
 /* For screens GREATER THAN 901px wide */
 @media (min-width : 850px) {
 
-#sidediv{
+#sidediv .pv{
   padding-right:12px;
 }
 
@@ -76,6 +87,7 @@
   box-shadow: 10px 20px 40px 20px #ddd;
   padding-right:0px !important;
   padding-top:100px !important;
+  min-height:1500px;
 }
 
 .innerPVDiv{
@@ -83,7 +95,7 @@
   margin-right:100px;
 }
 
-#innerdocbody {
+#innerdocbody .innerPV{
   min-height:1500px;
   padding-top:100px !important;
 }
