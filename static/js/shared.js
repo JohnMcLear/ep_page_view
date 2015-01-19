@@ -5,7 +5,6 @@ var collectContentPre = function(hook, context){
   var state = context.state;
   var lineAttributes = state.lineAttributes
   var tagIndex = tname;
-
   if(tagIndex >= 0){
     lineAttributes['pageBreak'] = tagIndex;
   }

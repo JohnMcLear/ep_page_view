@@ -57,13 +57,25 @@ exports.postAceInit = function(hook, context){
       var inner = $('iframe[name="ace_outer"]').contents().find('iframe[name="ace_inner"]');
       var style = "width:100%;margin-left:0;height:10px;background-color:transparent;margin-top:5px;margin-bottom:5px;border-bottom:none;";
       inner.contents().find("head").append("<style>.pageBreak{"+style+"}</style>");
+    },
+
+    pageBreaksEnable: function(){
+      var inner = $('iframe[name="ace_outer"]').contents().find('iframe[name="ace_inner"]');
+      inner.contents().find("head").append("<style>.pageBreak{display:block;}</style>");
+    },
+    pageBreaksDisable: function(){
+      var inner = $('iframe[name="ace_outer"]').contents().find('iframe[name="ace_inner"]');
+      inner.contents().find("head").append("<style>.pageBreak{display:none;}</style>");
     }
   }
 
   clientVars.plugins.plugins.ep_page_view.enable = pv.enable;
   clientVars.plugins.plugins.ep_page_view.disable = pv.disable;
+  clientVars.plugins.plugins.ep_page_view.pageBreaksEnable = pv.pageBreaksEnable;
+  clientVars.plugins.plugins.ep_page_view.pageBreaksDisable = pv.pageBreaksDisable;
 
   /* init */
+  // page view
   if (padcookie.getPref("page_view")) {
     $('#options-pageview').attr('checked','checked');
     pv.enable();
@@ -82,6 +94,25 @@ exports.postAceInit = function(hook, context){
     clientVars.plugins.plugins.ep_page_view.enabled = false;
   }
 
+  // page breaks
+  if (padcookie.getPref("page_breaks")) {
+    $('#options-pagebreaks').attr('checked','checked');
+    pv.pageBreaksEnable();
+    // set a value we will refer to later and other plugins will refer to
+    clientVars.plugins.plugins.ep_page_view.pageBreaksEnabled = true;
+  }else{
+    $('#options-pagebreaks').attr("checked", false);
+  }
+  if($('#options-pagebreaks').is(':checked')) {
+    pv.pageBreaksEnable();
+    // set a value we will refer to later and other plugins will refer to
+    clientVars.plugins.plugins.ep_page_view.pageBreaksEnabled = true;
+  } else {
+    pv.pageBreaksDisable();
+    // set a value we will refer to later and other plugins will refer to
+    clientVars.plugins.plugins.ep_page_view.pageBreaksEnabled = false;
+  }
+
   /* on click */
   $('#options-pageview').on('click', function() {
     if($('#options-pageview').is(':checked')) {
@@ -90,6 +121,15 @@ exports.postAceInit = function(hook, context){
     } else {
       pv.disable();
       padcookie.setPref("page_view", false);
+    }
+  });
+  $('#options-pagebreaks').on('click', function() {
+    if($('#options-pagebreaks').is(':checked')) {
+      pv.pageBreaksEnable();
+      padcookie.setPref("page_breaks", true);
+    } else {
+      pv.pageBreaksDisable();
+      padcookie.setPref("page_breaks", false);
     }
   });
 
@@ -254,6 +294,7 @@ exports.aceKeyEvent = function(hook, callstack, editorInfo, rep, documentAttribu
 }
 
 exports.aceEditEvent = function(hook, callstack, editorInfo, rep, documentAttributeManager){
+  // This seems a little too often to run
   // If we're not in page view mode just hide all the things
   if($('#options-pageview').is(':checked')) {}else{
     $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").children("div").find('.pageBreakComputed').remove();
