@@ -11,11 +11,11 @@ exports.postAceInit = function(hook, context){
   var pv = {
 
     enable: function() {
-      if(pad.plugins && pad.plugins.ep_slideshow && pad.plugins.ep_slideshow.isEnabled) return false;
+      if(clientVars.plugins.plugins && clientVars.plugins.plugins.ep_slideshow && clientVars.plugins.plugins.ep_slideshow.isEnabled) return false;
       $('#editorcontainer, iframe').addClass('page_view');
       $innerIframe.addClass('outerPV');
       $outerIframeContents.find('#outerdocbody').addClass("outerBackground");
-      $innerdocbody.addClass('innerPV').css("margin-left","0px")
+      $innerdocbody.addClass('innerPV').css("margin-left","0px");
 
       $innerdocbody.contents().find('.pageBreak').click(function(e){
         $(this).focusout().blur();
@@ -28,14 +28,15 @@ exports.postAceInit = function(hook, context){
       // var containerTop = $('.toolbar').position().top + $('.toolbar').height() +5;
       // $('#editorcontainerbox').css("top", containerTop);
       $('#ep_page_ruler').show();
-      $innerIframe.contents().find('.pageBreak').addClass('pageViewOn').removeClass('pageViewOff');
-
       // if line numbers are enabled..
       if($('#options-linenoscheck').is(':checked')) {
         $outerIframeContents.find('#sidediv').addClass("lineNumbersAndPageView");
         $innerdocbody.addClass('innerPVlineNumbers');
       }
       reDrawPageBreaks();
+      var inner = $('iframe[name="ace_outer"]').contents().find('iframe[name="ace_inner"]');
+      var style = "width:850px;margin-left:-102px;height:40px;background-color:#f7f7f7;margin-top:100px;margin-bottom:100px;border-bottom:1px dotted #aaa";
+      inner.contents().find("head").append("<style>.pageBreak{"+style+"}</style>");
     },
 
     disable: function() {
@@ -47,27 +48,38 @@ exports.postAceInit = function(hook, context){
       $innerdocbody.css("margin-left","-100px");
       $outerIframeContents.find('#outerdocbody').removeClass("outerBackground");
       $('#ep_page_ruler').hide();
-      // var containerTop = $('.toolbar').position().top + $('.toolbar').height() +5;
-      // $('#editorcontainerbox').css("top", containerTop+"px");
-      // $('#editorcontainer').css("top", 0);
-      $innerIframe.contents().find('.pageBreak').removeClass('pageViewOn').addClass('pageViewOff');
-       if($('#options-linenoscheck').is(':checked')) {
+
+      if($('#options-linenoscheck').is(':checked')) {
         $outerIframeContents.find('#sidediv').removeClass("lineNumbersAndPageView");
         $innerdocbody.removeClass('innerPVlineNumbers');
       }
       reDrawPageBreaks();
+      var inner = $('iframe[name="ace_outer"]').contents().find('iframe[name="ace_inner"]');
+      var style = "width:100%;margin-left:0;height:10px;background-color:transparent;margin-top:5px;margin-bottom:5px;border-bottom:none;";
+      inner.contents().find("head").append("<style>.pageBreak{"+style+"}</style>");
     }
   }
+
+  clientVars.plugins.plugins.ep_page_view.enable = pv.enable;
+  clientVars.plugins.plugins.ep_page_view.disable = pv.disable;
 
   /* init */
   if (padcookie.getPref("page_view")) {
     $('#options-pageview').attr('checked','checked');
     pv.enable();
+    // set a value we will refer to later and other plugins will refer to
+    clientVars.plugins.plugins.ep_page_view.enabled = true;
+  }else{
+    $('#options-pageview').attr("checked", false);
   }
   if($('#options-pageview').is(':checked')) {
     pv.enable();
+    // set a value we will refer to later and other plugins will refer to
+    clientVars.plugins.plugins.ep_page_view.enabled = true;
   } else {
     pv.disable();
+    // set a value we will refer to later and other plugins will refer to
+    clientVars.plugins.plugins.ep_page_view.enabled = false;
   }
 
   /* on click */
@@ -98,8 +110,7 @@ exports.postAceInit = function(hook, context){
     },'insertPageBreak' , true);
   });
 
-  if(!pad.plugins) pad.plugins = {};
-  pad.plugins.ep_page_view = pv;
+  if(!clientVars.plugins.plugins) clientVars.plugins.plugins = {};
 };
 
 
@@ -212,7 +223,6 @@ exports.aceInitialized = function(hook, context){
   editorInfo.ace_doInsertPageBreak = _(doInsertPageBreak).bind(context);
 }
 
-
 // Listen for Control Enter and if it is control enter then insert page break
 // Also listen for Up key to see if we need to replace focus at position 0.
 exports.aceKeyEvent = function(hook, callstack, editorInfo, rep, documentAttributeManager, evt){
@@ -321,7 +331,7 @@ reDrawPageBreaks = function(){
       // If it's not already a page break append a page break
       if(!isAlreadyPageBreak){
         // console.log("Adding break as PX since last break is ", pxSinceLastBreak + height);
-        $(this).append("<div class='pageBreakComputed pageViewOn' contentEditable=false></div>");
+        $(this).append("<div class='pageBreakComputed' contentEditable=false></div>");
         // console.log("AUTOMATIC pxSinceLastBreak", pxSinceLastBreak, "height", height);
         pages.push(pxSinceLastBreak + height);
 
