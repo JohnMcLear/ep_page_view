@@ -217,6 +217,39 @@ exports.aceCreateDomLine = function(name, context){
   return [];
 };
 
+function doRemovePageBreak(){
+  // Backspace events means you might want to remove a line break, this stops the text ending up
+  // on the same line as the page break..
+  var rep = this.rep;
+  var documentAttributeManager = this.documentAttributeManager;
+  if (!(rep.selStart && rep.selEnd)){ return; } // only continue if we have some caret position
+  var firstLine = rep.selStart[0]; // Get the first line
+  var line = rep.lines.atIndex(firstLine);
+
+  // If it's actually a page break..
+  if(line.lineNode && (line.lineNode.firstChild && line.lineNode.firstChild.className === "pageBreak")){
+    documentAttributeManager.removeAttributeOnLine(firstLine, 'pageBreak'); // remove the page break from the line
+    // TODO: Control Z can make this kinda break
+
+    // Get the document
+    var document = this.editorInfo.ace_getDocument();
+
+    // Update the selection from the rep
+    this.editorInfo.ace_updateBrowserSelectionFromRep();
+
+    // Get the current selection
+    var myselection = document.getSelection();
+
+    // Get the selections top offset
+    var caretOffsetTop = myselection.focusNode.offsetTop;
+
+    // Move to the new Y co-ord to bring the new page into focus
+    $('iframe[name="ace_outer"]').contents().find('#outerdocbody').scrollTop(caretOffsetTop-120); // Works in Chrome
+    $('iframe[name="ace_outer"]').contents().find('#outerdocbody').parent().scrollTop(caretOffsetTop-120); // Works in Firefox
+    // Sighs
+  }
+}
+
 function doInsertPageBreak(){
   this.editorInfo.ace_doReturnKey();
   var rep = this.rep;
@@ -261,6 +294,7 @@ function doInsertPageBreak(){
 exports.aceInitialized = function(hook, context){
   var editorInfo = context.editorInfo;
   editorInfo.ace_doInsertPageBreak = _(doInsertPageBreak).bind(context);
+  editorInfo.ace_doRemovePageBreak = _(doRemovePageBreak).bind(context);
 }
 
 // Listen for Control Enter and if it is control enter then insert page break
@@ -289,6 +323,11 @@ exports.aceKeyEvent = function(hook, callstack, editorInfo, rep, documentAttribu
       // Sighs
     }
     return true;
+  }
+
+  // Backspace deletes full line above if it is a pagebreak
+  if(k == 8 && evt.type == "keyup"){
+    callstack.editorInfo.ace_doRemovePageBreak();
   }
   return;
 }
