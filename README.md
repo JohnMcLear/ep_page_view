@@ -11,6 +11,7 @@ Features:
 * Ability to add page breaks (Using Control Enter)
 * Automatic detection of page length to create pages
 * Toggle on/off Line Numbers support without breaking styling
+* Toggle Page breaks Visibility
 * Maintain page breaks when in non-page view.
 
 ## Set page view as default
