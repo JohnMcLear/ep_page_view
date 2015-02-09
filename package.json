@@ -1,6 +1,6 @@
 {
   "name":        "ep_page_view",
-  "version":     "0.5.19",
+  "version":     "0.5.20",
   "keywords":    ["page view", "pv", "preview", "overview", "page break", "break", "new page"],
   "description": "Add support to do 'page view', with a toggle on/off option in Settings, also Page Breaks with Control Enter",
   "contributors": [

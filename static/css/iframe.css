@@ -1,3 +1,7 @@
+.innerPV{
+  background-color:#fff;
+}
+
 .pageView {
   width:100%;
   margin-left:0px;
@@ -23,7 +27,7 @@
   }
 }
 
-@media (max-width : 930px) {
+@media (max-width : 900px) {
   #innerdocbody > div {
     margin-left:0px !important;
     margin-right:0px;
@@ -36,90 +40,90 @@
     border:none;
     box-shadow:none;
   }
-
 }
 
-/* For screens GREATER THAN 901px wide */
-@media (min-width : 850px) {
+/* For screens GREATER THAN 845px wide */
+/* Note some browers are this pissy about this..  Chrome and FF respond at different sizes etc. */
+@media (min-width : 845px) {
 
-#sidediv .pv{
-  padding-right:12px;
-}
+  #sidediv .pv{
+    padding-right:12px;
+  }
 
-.innerPVlineNumbers{
-  border-radius: 0px 5px 0 0;
-}
+  .innerPVlineNumbers{
+    border-radius: 0px 5px 0 0;
+  }
 
-.outerPV{
-  width:850px !important;
-}
+  .outerPV{
+    width:850px !important;
+  }
 
-.pageViewOn {
-  width:850px;
-  margin-left:-102px;
-  height:40px;
-  background-color:#f7f7f7;
-  margin-top:100px;
-  margin-bottom:100px;
-}
+  .pageViewOn {
+    width:850px;
+    margin-left:-102px;
+    height:40px;
+    background-color:#f7f7f7;
+    margin-top:100px;
+    margin-bottom:100px;
+  }
 
-.pageBreakComputed, .pageBreak {
-  page-break-after: always;
-  -webkit-region-break-inside: avoid;
-  border-bottom: 1px dotted #AAA;
-  border-top: 1px dotted #aaa;
-  cursor: default;
-}
+  .pageBreakComputed, .pageBreak {
+    page-break-after: always;
+    -webkit-region-break-inside: avoid;
+    border-bottom: 1px dotted #AAA;
+    border-top: 1px dotted #aaa;
+    cursor: default;
+  }
 
-.outerBackground{
-  background-color:#f7f7f7 !important;
-  width: 850px;
-  margin:auto;
-  border:none;
-}
+  .outerBackground{
+    background-color:#f7f7f7 !important;
+    width: 850px;
+    margin:auto;
+    border:none;
+  }
 
-.innerPV{
-  background-color:#fff;
-  border-radius: 5px 5px 0 0;
-  border: 1px solid #ccc;
-  border-width: 1px 1px 0 1px;
-  position: relative;
-  box-shadow: 10px 20px 40px 20px #ddd;
-  padding-right:0px !important;
-  padding-top:100px !important;
-  min-height:1500px;
-}
+  .innerPV{
+    background-color:#fff;
+    border-radius: 5px 5px 0 0;
+    border: 1px solid #ccc;
+    border-width: 1px 1px 0 1px;
+    position: relative;
+    box-shadow: 10px 20px 40px 20px #ddd;
+    padding-right:0px !important;
+    padding-top:100px !important;
+    min-height:1500px;
+  }
 
-.innerPVDiv{
-  margin-left:100px;
-  margin-right:100px;
-}
+  .innerPVDiv{
+    margin-left:100px;
+    margin-right:100px;
+  }
 
-#innerdocbody .innerPV{
-  min-height:1500px;
-  padding-top:100px !important;
-}
+  #innerdocbody .innerPV{
+    min-height:1500px;
+    padding-top:100px !important;
+  }
 
-#innerdocbody > div{
-  margin-left:100px !important;
-  margin-right:100px;
-}
+  #innerdocbody > div{
+    margin-left:100px !important;
+     margin-right:100px;
+  }
 
-.pageBreakFullScreen{
-  width:100%;
-  height:1px;
-}
+  .pageBreakFullScreen{
+    width:100%;
+    height:1px;
+  }
 
-.lineNumbersAndPageView{
-  /* width:28px !important; */
-  /* The above breaks ep_comments */
-  border-radius: 5px 0 0 0;
-  border: 1px solid #ccc;
-  border-right:none !important;
-  top: 7px !important;
-  left: auto !important;
-  padding-top: 100px !important;
-}
+  .lineNumbersAndPageView{
+    /* width:28px !important; */
+    /* The above breaks ep_comments */
+   border-radius: 5px 0 0 0;
+    border: 1px solid #ccc;
+    border-right:none !important;
+    top: 7px !important;
+    left: auto !important;
+    padding-top: 100px !important;
+  }
 
   .outerBackground{
     background-color:#6e6e !important;
@@ -131,3 +135,4 @@
   }
 
 }
+
