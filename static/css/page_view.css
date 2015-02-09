@@ -1,9 +1,11 @@
 #editorcontainerbox{
+/* Removed as it messed up the editbar styling */
+/*
   background-color:#F7F7F7;
+*/
 }
 
 @media (min-width: 921px) {
-  
   #editorcontainer.page_view {
     overflow: hidden;
     background-color: #f7f7f7;
@@ -12,9 +14,12 @@
   }
 
   #editorcontainerbox{
+/*
     background-color:#f7f7f7;
+*/
     top:0px;
   }
+
   #editorcontainer .page_view{
     top:0px;
     padding-top:20px;
