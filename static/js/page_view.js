@@ -37,6 +37,7 @@ exports.postAceInit = function(hook, context){
       var inner = $('iframe[name="ace_outer"]').contents().find('iframe[name="ace_inner"]');
       var style = "width:850px;margin-left:-102px;height:40px;background-color:#f7f7f7;margin-top:100px;margin-bottom:100px;border-bottom:1px dotted #aaa";
       inner.contents().find("head").append("<style>.pageBreak{"+style+"}</style>");
+      inner.contents().find("head").append("<style>.pageBreakComputed{"+style+"}</style>");
     },
 
     disable: function() {
@@ -57,15 +58,18 @@ exports.postAceInit = function(hook, context){
       var inner = $('iframe[name="ace_outer"]').contents().find('iframe[name="ace_inner"]');
       var style = "width:100%;margin-left:0;height:10px;background-color:transparent;margin-top:5px;margin-bottom:5px;border-bottom:none;";
       inner.contents().find("head").append("<style>.pageBreak{"+style+"}</style>");
+      inner.contents().find("head").append("<style>.pageBreakComputed{"+style+"}</style>");
     },
 
     pageBreaksEnable: function(){
       var inner = $('iframe[name="ace_outer"]').contents().find('iframe[name="ace_inner"]');
       inner.contents().find("head").append("<style>.pageBreak{display:block;}</style>");
+      inner.contents().find("head").append("<style>.pageBreakComputed{display:block;}</style>");
     },
     pageBreaksDisable: function(){
       var inner = $('iframe[name="ace_outer"]').contents().find('iframe[name="ace_inner"]');
       inner.contents().find("head").append("<style>.pageBreak{display:none;}</style>");
+      inner.contents().find("head").append("<style>.pageBreakComputed{display:none;}</style>");
     }
   }
 
