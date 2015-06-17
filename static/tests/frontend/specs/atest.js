@@ -13,7 +13,7 @@ describe("Page View", function(){
   it("Disable Page View", function(done) {
     this.timeout(60000);
     var chrome$ = helper.padChrome$;
-    if(chrome$('#options-pageview').attr("checked")) chrome$('#options-pageview').click();
+    if(chrome$('#options-pageview').prop("checked")) chrome$('#options-pageview').click();
     var $editorContainer = chrome$("#editorcontainer");
 
     helper.waitFor(function(){
@@ -27,7 +27,7 @@ describe("Page View", function(){
   it("Enable Page View", function(done) {
     this.timeout(60000);
     var chrome$ = helper.padChrome$;
-    if(!chrome$('#options-pageview').attr("checked")) chrome$('#options-pageview').click();
+    if(!chrome$('#options-pageview').prop("checked")) chrome$('#options-pageview').click();
     var $editorContainer = chrome$("#editorcontainer");
 
     helper.waitFor(function(){

@@ -7,7 +7,7 @@ exports.postAceInit = function(hook, context){
   var $outerIframeContents = $('iframe[name="ace_outer"]').contents();
   var $innerIframe = $outerIframeContents.find('iframe');
   var $innerdocbody = $innerIframe.contents().find("#innerdocbody");
-    
+
   var pv = {
 
     enable: function() {
@@ -41,7 +41,7 @@ exports.postAceInit = function(hook, context){
     },
 
     disable: function() {
-      $('#options-pageview').attr("checked", false);
+      $('#options-pageview').prop("checked", false);
       // console.log("disabling");
       $('#editorcontainer, iframe').removeClass('page_view');
       $innerdocbody.removeClass('innerPV');
@@ -81,12 +81,12 @@ exports.postAceInit = function(hook, context){
   /* init */
   // page view
   if (padcookie.getPref("page_view")) {
-    $('#options-pageview').attr('checked','checked');
+    $('#options-pageview').prop('checked', true);
     pv.enable();
     // set a value we will refer to later and other plugins will refer to
     clientVars.plugins.plugins.ep_page_view.enabled = true;
   }else{
-    $('#options-pageview').attr("checked", false);
+    $('#options-pageview').prop("checked", false);
   }
   if($('#options-pageview').is(':checked')) {
     pv.enable();
@@ -100,12 +100,12 @@ exports.postAceInit = function(hook, context){
 
   // page breaks
   if (padcookie.getPref("page_breaks")) {
-    $('#options-pagebreaks').attr('checked','checked');
+    $('#options-pagebreaks').prop('checked', true);
     pv.pageBreaksEnable();
     // set a value we will refer to later and other plugins will refer to
     clientVars.plugins.plugins.ep_page_view.pageBreaksEnabled = true;
   }else{
-    $('#options-pagebreaks').attr("checked", false);
+    $('#options-pagebreaks').prop("checked", false);
   }
   if($('#options-pagebreaks').is(':checked')) {
     pv.pageBreaksEnable();
@@ -140,10 +140,10 @@ exports.postAceInit = function(hook, context){
   /* from URL param */
   var urlContainspageviewTrue = (getParam("pageview") == "true"); // if the url param is set
   if(urlContainspageviewTrue){
-    $('#options-pageview').attr('checked','checked');
+    $('#options-pageview').prop('checked',true);
     pv.enable();
   }else if (getParam("pageview") == "false"){
-    $('#options-pageview').attr('checked',false);
+    $('#options-pageview').prop('checked',false);
     pv.disable();
   }
 
@@ -264,7 +264,7 @@ function doInsertPageBreak(){
   _(_.range(firstLine, lastLine + 1)).each(function(i){ // For each line, either turn on or off page break
     var isPageBreak = documentAttributeManager.getAttributeOnLine(i, 'pageBreak');
     if(!isPageBreak){ // if its already a PageBreak item
-      documentAttributeManager.setAttributeOnLine(i, 'pageBreak', 'pageBreak'); // make the line a page break	
+      documentAttributeManager.setAttributeOnLine(i, 'pageBreak', 'pageBreak'); // make the line a page break
     }else{
       documentAttributeManager.removeAttributeOnLine(i, 'pageBreak'); // remove the page break from the line
     }
@@ -438,4 +438,4 @@ reDrawPageBreaks = function(){
   // if(lines) console.log("Lines", lines);
   // if(pages) console.log("Pages", pages);
 
-} 
+}
