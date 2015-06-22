@@ -79,15 +79,25 @@ exports.postAceInit = function(hook, context){
   clientVars.plugins.plugins.ep_page_view.pageBreaksDisable = pv.pageBreaksDisable;
 
   /* init */
+  /* from URL param */
+  var urlContainspageviewTrue = (getParam("pageview") == "true"); // if the url param is set
+  if(urlContainspageviewTrue){
+    $('#options-pageview').prop('checked',true);
+  }else if (getParam("pageview") == "false"){
+    $('#options-pageview').prop('checked',false);
+  }
+
+  /* from cookie */
   // page view
   if (padcookie.getPref("page_view")) {
     $('#options-pageview').prop('checked', true);
-    pv.enable();
     // set a value we will refer to later and other plugins will refer to
     clientVars.plugins.plugins.ep_page_view.enabled = true;
-  }else{
+  }else if (padcookie.getPref("page_view") == false){
+    // only disable PV if cookie is set to disabled it. If cookie is not set, we do nothing
     $('#options-pageview').prop("checked", false);
   }
+
   if($('#options-pageview').is(':checked')) {
     pv.enable();
     // set a value we will refer to later and other plugins will refer to
@@ -136,16 +146,6 @@ exports.postAceInit = function(hook, context){
       padcookie.setPref("page_breaks", false);
     }
   });
-
-  /* from URL param */
-  var urlContainspageviewTrue = (getParam("pageview") == "true"); // if the url param is set
-  if(urlContainspageviewTrue){
-    $('#options-pageview').prop('checked',true);
-    pv.enable();
-  }else if (getParam("pageview") == "false"){
-    $('#options-pageview').prop('checked',false);
-    pv.disable();
-  }
 
   // Bind the event handler to the toolbar buttons
   $('#insertPageBreak').on('click', function(){
