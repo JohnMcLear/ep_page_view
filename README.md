@@ -20,6 +20,11 @@ Features:
 2. Append:
    `"ep_page_view_default" : true,`
 
+## Disable change of page view setting in UI
+1. Open `settings.json`
+2. Append:
+   `"ep_page_view_disable_change" : true,`
+
 ## Embed parameter
 Suffix this on your pad URL to auto display page view when opening a pad ``&pageview=true``
 

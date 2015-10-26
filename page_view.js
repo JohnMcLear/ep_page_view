@@ -1,10 +1,12 @@
 var eejs = require('ep_etherpad-lite/node/eejs/');
 var settings = require('ep_etherpad-lite/node/utils/Settings');
 var checked_state = '';
+var disabled = '';
 
 exports.eejsBlock_mySettings = function (hook_name, args, cb) {
   if (settings.ep_page_view_default) checked_state = 'checked';
-  args.content = args.content + eejs.require('ep_page_view/templates/page_view_entry.ejs', {checked : checked_state});
+  if (settings.ep_page_view_disable_change) disabled = 'disabled';
+  args.content = args.content + eejs.require('ep_page_view/templates/page_view_entry.ejs', {checked : checked_state, disabled: disabled});
   return cb();
 }
 
