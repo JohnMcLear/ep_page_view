@@ -14,8 +14,12 @@ exports.getLineHTMLForExport = function (hook, context) {
   var header = _analyzeLine(context.attribLine, context.apool);
   if (header) {
     var inlineStyle = getInlineStyle(header);
-    return "<span style='page-break-before: always;page-break-inside: avoid;'>" + context.text.substring(1) + "</span>";
+    if (context.lineContent[0] === '*') {
+      context.lineContent = context.lineContent.substring(1);
+    }
+    context.lineContent = "<span style='page-break-before: always;page-break-inside: avoid;'>" + context.lineContent + "</span>";
   }
+  return true;
 }
 
 function _analyzeLine(alineAttrs, apool) {
