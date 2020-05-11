@@ -1,3 +1,7 @@
+# THIS PLUGIN IS DEFUNCT.  
+
+This plugin is now part of Etherpad.  It was available as of 1.8 under the colibris skin and became the default by 1.8.3
+
 # Etherpad Page View
 
 <img src="http://i.imgur.com/tanIwza.png" alt="Page view">
