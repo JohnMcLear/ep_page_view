@@ -1,7 +1,15 @@
 {
-  "name":        "ep_page_view",
-  "version":     "0.5.25",
-  "keywords":    ["page view", "pv", "preview", "overview", "page break", "break", "new page"],
+  "name": "ep_page_view",
+  "version": "0.5.26",
+  "keywords": [
+    "page view",
+    "pv",
+    "preview",
+    "overview",
+    "page break",
+    "break",
+    "new page"
+  ],
   "description": "DEFUNCT PLUGIN:  NOW PART OF ETHERPAD CORE ----!! Add support to do 'page view', with a toggle on/off option in Settings, also Page Breaks with Control Enter",
   "contributors": [
     {
@@ -15,14 +23,11 @@
       "url": "https://factor.cc/"
     }
   ],
-
-  "repository" : {
+  "repository": {
     "type": "git",
-    "url":  "git://github.com/ether/ep_page_view.git"
+    "url": "git://github.com/ether/ep_page_view.git"
   },
-
   "dependencies": {},
-
   "engines": {
     "node": "*"
   }
